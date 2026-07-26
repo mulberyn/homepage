@@ -1,19 +1,21 @@
 import { Fragment } from 'react'
 import { User, GraduationCap, Briefcase, BookOpen, Award } from 'lucide-react'
-import { userData } from '../config/data.js'
-import Section from './Section.jsx'
-import TimelineList from './TimelineList.jsx'
-import TimelineItem from './TimelineItem.jsx'
-import EducationItem from './EducationItem.jsx'
-import PublicationItem from './PublicationItem.jsx'
-import AwardsList from './AwardsList.jsx'
+import { userData } from '../config/data'
+import Section from './Section'
+import TimelineList from './TimelineList'
+import TimelineItem from './TimelineItem'
+import EducationItem from './EducationItem'
+import PublicationItem from './PublicationItem'
+import AwardsList from './AwardsList'
 
 /**
  * Render a bio string, turning **double-asterisk** spans into highlighted text
  * and preserving paragraph breaks (blank lines). Dependency-free.
  */
-function RichBio({ text }) {
-  return text.split('\n\n').map((para, pi) => (
+function RichBio({ text }: { text: string }) {
+  return (
+    <>
+      {text.split('\n\n').map((para, pi) => (
     <p key={pi} className="text-text-secondary [&:not(:first-child)]:mt-3">
       {para.split(/(\*\*[^*]+\*\*)/g).map((chunk, ci) => {
         const match = chunk.match(/^\*\*([^*]+)\*\*$/)
@@ -24,9 +26,11 @@ function RichBio({ text }) {
         ) : (
           <Fragment key={ci}>{chunk}</Fragment>
         )
-      })}
-    </p>
-  ))
+          })}
+        </p>
+      ))}
+    </>
+  )
 }
 
 /**
@@ -53,7 +57,7 @@ export default function MainContent() {
         )}
 
         {/* ---------------- Education ---------------- */}
-        {enabled.has('education') && userData.education?.length > 0 && (
+        {enabled.has('education') && userData.education && userData.education.length > 0 && (
           <Section id="education" icon={GraduationCap} title="Education">
             <ul className="space-y-5">
               {userData.education.map((item, i) => (
@@ -71,7 +75,7 @@ export default function MainContent() {
         )}
 
         {/* ---------------- Experience ---------------- */}
-        {enabled.has('experience') && userData.experience?.length > 0 && (
+        {enabled.has('experience') && userData.experience && userData.experience.length > 0 && (
           <Section id="experience" icon={Briefcase} title="Experience">
             <TimelineList>
               {userData.experience.map((item, i, arr) => (
@@ -89,7 +93,7 @@ export default function MainContent() {
         )}
 
         {/* ---------------- Publications ---------------- */}
-        {enabled.has('publications') && userData.publications?.length > 0 && (
+        {enabled.has('publications') && userData.publications && userData.publications.length > 0 && (
           <Section id="publications" icon={BookOpen} title="Publications">
             <TimelineList>
               {userData.publications.map((pub, i, arr) => (
@@ -104,7 +108,7 @@ export default function MainContent() {
         )}
 
         {/* ---------------- Awards (with show-more fold) ---------------- */}
-        {enabled.has('awards') && userData.awards?.length > 0 && (
+        {enabled.has('awards') && userData.awards && userData.awards.length > 0 && (
           <Section id="awards" icon={Award} title="Awards">
             <AwardsList awards={userData.awards} />
           </Section>

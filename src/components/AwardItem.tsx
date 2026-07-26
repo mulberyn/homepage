@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion'
 import { Medal } from 'lucide-react'
+import type { Award, Medal as MedalKind } from '../config/data'
 
 /**
  * AwardItem
@@ -9,12 +10,17 @@ import { Medal } from 'lucide-react'
  */
 
 // Explicit medal colors (not theme accent) so gold ≠ silver in both modes.
-const MEDAL_COLOR = {
+const MEDAL_COLOR: Record<MedalKind, string> = {
   gold: '#d9a520', // warm gold
   silver: '#9ca3af', // cool silver/gray
 }
 
-export default function AwardItem({ title, date, medal = 'silver', highlight }) {
+export default function AwardItem({
+  title,
+  date,
+  medal = 'silver',
+  highlight,
+}: Award) {
   return (
     <motion.li
       className="flex items-center gap-3.5 py-3"
@@ -27,7 +33,7 @@ export default function AwardItem({ title, date, medal = 'silver', highlight }) 
         size={18}
         strokeWidth={2.2}
         className="shrink-0"
-        style={{ color: MEDAL_COLOR[medal] || MEDAL_COLOR.silver }}
+        style={{ color: MEDAL_COLOR[medal] ?? MEDAL_COLOR.silver }}
       />
       <h3
         className={`min-w-0 flex-1 truncate font-sans text-sm ${

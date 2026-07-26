@@ -1,7 +1,8 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { GraduationCap } from 'lucide-react'
-import { asset } from '../utils/asset.js'
+import { asset } from '../utils/asset'
+import type { EducationEntry } from '../config/data'
 
 /**
  * EducationItem
@@ -14,7 +15,13 @@ import { asset } from '../utils/asset.js'
  * image still fails to load, a GraduationCap icon fills the same frame so the
  * layout never collapses or shows a broken-image glyph.
  */
-export default function EducationItem({ school, logo, major, degree, dates }) {
+export default function EducationItem({
+  school,
+  logo,
+  major,
+  degree,
+  dates,
+}: EducationEntry) {
   const [logoFailed, setLogoFailed] = useState(false)
 
   return (

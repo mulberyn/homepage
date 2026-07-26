@@ -7,7 +7,7 @@
  * the base exactly once. External URLs and already-relative paths pass
  * through untouched.
  */
-export function asset(path) {
+export function asset(path: string | undefined): string | undefined {
   if (!path || /^(?:[a-z]+:)?\/\//i.test(path) || !path.startsWith('/')) {
     return path
   }

@@ -1,8 +1,9 @@
 import { useEffect, useLayoutEffect, useRef, useState } from 'react'
+import type { MouseEvent } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Menu, X } from 'lucide-react'
-import { userData } from '../config/data.js'
-import ThemeToggle from './ThemeToggle.jsx'
+import { userData } from '../config/data'
+import ThemeToggle from './ThemeToggle'
 
 /**
  * Navbar
@@ -17,8 +18,16 @@ import ThemeToggle from './ThemeToggle.jsx'
  * smooth-scrolls to the section.
  */
 
+interface Indicator {
+  left: number
+  width: number
+  ready: boolean
+}
+
 export default function Navbar() {
-  const [active, setActive] = useState(userData.navItems[0]?.id)
+  const [active, setActive] = useState<string | undefined>(
+    userData.navItems[0]?.id
+  )
   const [open, setOpen] = useState(false) // mobile menu open?
 
   // ---- Sliding underline indicator (ref-based, glitch-free) ----
@@ -26,13 +35,17 @@ export default function Navbar() {
   // stutter across distant items), we keep ONE persistent underline and drive
   // its left/width from the measured position of the active link. This gives a
   // smooth, direct slide across any distance.
-  const listRef = useRef(null)
-  const linkRefs = useRef({})
-  const [indicator, setIndicator] = useState({ left: 0, width: 0, ready: false })
+  const listRef = useRef<HTMLUListElement | null>(null)
+  const linkRefs = useRef<Record<string, HTMLAnchorElement | null>>({})
+  const [indicator, setIndicator] = useState<Indicator>({
+    left: 0,
+    width: 0,
+    ready: false,
+  })
 
   const measure = () => {
     const ul = listRef.current
-    const el = linkRefs.current[active]
+    const el = active ? linkRefs.current[active] : null
     if (ul && el) {
       // Measure the link relative to the <ul> (robust regardless of which
       // ancestor is the positioning context — offsetLeft can resolve against
@@ -104,7 +117,7 @@ export default function Navbar() {
   }, [])
 
   // Smooth-scroll to a section and close the mobile menu.
-  const handleNavClick = (e, id) => {
+  const handleNavClick = (e: MouseEvent<HTMLAnchorElement>, id: string) => {
     e.preventDefault()
     document
       .getElementById(id)
@@ -137,7 +150,9 @@ export default function Navbar() {
             return (
               <li key={item.id}>
                 <a
-                  ref={(el) => (linkRefs.current[item.id] = el)}
+                  ref={(el) => {
+                    linkRefs.current[item.id] = el
+                  }}
                   href={`#${item.id}`}
                   onClick={(e) => handleNavClick(e, item.id)}
                   className={`block rounded-full px-4 py-2 font-sans text-sm font-medium transition-colors duration-200 ${

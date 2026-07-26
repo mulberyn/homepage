@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import { userData } from '../config/data.js'
+import { userData } from '../config/data'
 
 /**
  * Seo
@@ -11,12 +11,16 @@ import { userData } from '../config/data.js'
  *   • JSON-LD structured data (schema.org Person) so search engines can
  *     understand who the page is about.
  *
- * Everything is derived from `userData` (config/data.js) — no extra library
+ * Everything is derived from `userData` (config/data.ts) — no extra library
  * (react-helmet etc.) needed. Values are read once; this is a static page.
  */
 
 // Create or update a <meta> tag by name or property.
-function setMeta(attr, key, content) {
+function setMeta(
+  attr: 'name' | 'property',
+  key: string,
+  content: string | undefined
+) {
   if (!content) return
   let el = document.head.querySelector(`meta[${attr}="${key}"]`)
   if (!el) {
@@ -35,7 +39,7 @@ export default function Seo() {
     const pageTitle = `${name} — ${title}`
     const description =
       seo.description || `${name}, ${title} at ${affiliation}.`
-    const image = seo.ogImage || avatar
+    const image = seo.ogImage || avatar || ''
     // Resolve relative asset paths against the deployed base (Vite injects it).
     const absImage = /^https?:/.test(image)
       ? image
@@ -96,7 +100,9 @@ export default function Seo() {
         .map(([, v]) => v),
     }
 
-    let script = document.getElementById('jsonld-person')
+    let script = document.getElementById(
+      'jsonld-person'
+    ) as HTMLScriptElement | null
     if (!script) {
       script = document.createElement('script')
       script.type = 'application/ld+json'

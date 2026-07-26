@@ -1,4 +1,13 @@
 import { motion } from 'framer-motion'
+import type { LucideIcon } from 'lucide-react'
+import type { ReactNode } from 'react'
+
+interface SectionProps {
+  id: string
+  icon?: LucideIcon
+  title: string
+  children: ReactNode
+}
 
 /**
  * Section
@@ -15,7 +24,7 @@ import { motion } from 'framer-motion'
  *   • `icon` — Lucide icon component rendered before the title
  *   • a gentle Framer Motion fade-up reveal on scroll into view.
  */
-export default function Section({ id, icon: Icon, title, children }) {
+export default function Section({ id, icon: Icon, title, children }: SectionProps) {
   return (
     <motion.section
       id={id}

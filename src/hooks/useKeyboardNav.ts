@@ -1,5 +1,9 @@
 import { useEffect } from 'react'
-import { userData } from '../config/data.js'
+import { userData } from '../config/data'
+
+interface UseKeyboardNavOptions {
+  toggleTheme?: () => void
+}
 
 /**
  * useKeyboardNav
@@ -15,11 +19,13 @@ import { userData } from '../config/data.js'
  * Keystrokes are ignored while typing in an input/textarea or when a modifier
  * key is held, so it never fights with the browser or form fields.
  */
-export default function useKeyboardNav({ toggleTheme } = {}) {
+export default function useKeyboardNav({
+  toggleTheme,
+}: UseKeyboardNavOptions = {}) {
   useEffect(() => {
     const ids = userData.navItems.map((n) => n.id)
 
-    const currentIndex = () => {
+    const currentIndex = (): number => {
       // The section whose top is closest to (just above) the viewport middle.
       const mid = window.innerHeight * 0.35
       let best = 0
@@ -36,22 +42,23 @@ export default function useKeyboardNav({ toggleTheme } = {}) {
       return best
     }
 
-    const goTo = (i) => {
+    const goTo = (i: number) => {
       const clamped = Math.max(0, Math.min(ids.length - 1, i))
       const el = document.getElementById(ids[clamped])
       if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' })
     }
 
-    const onKey = (e) => {
+    const onKey = (e: KeyboardEvent) => {
       // Ignore if typing or using shortcuts with modifiers.
-      const tag = e.target?.tagName
+      const target = e.target instanceof HTMLElement ? e.target : null
+      const tag = target?.tagName
       if (
         e.metaKey ||
         e.ctrlKey ||
         e.altKey ||
         tag === 'INPUT' ||
         tag === 'TEXTAREA' ||
-        e.target?.isContentEditable
+        target?.isContentEditable
       ) {
         return
       }

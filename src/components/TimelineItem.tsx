@@ -1,5 +1,13 @@
 import { motion } from 'framer-motion'
 
+interface TimelineItemProps {
+  date?: string
+  title: string
+  subtitle?: string
+  description?: string
+  isLast?: boolean
+}
+
 /**
  * TimelineItem
  * -------------------------------------------------------------------------
@@ -13,7 +21,7 @@ export default function TimelineItem({
   subtitle,
   description,
   isLast,
-}) {
+}: TimelineItemProps) {
   return (
     <motion.li
       className="group relative pl-8"

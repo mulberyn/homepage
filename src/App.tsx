@@ -1,10 +1,10 @@
-import Navbar from './components/Navbar.jsx'
-import Hero from './components/Hero.jsx'
-import MainContent from './components/MainContent.jsx'
-import ArcBackground from './components/ArcBackground.jsx'
-import Seo from './components/Seo.jsx'
-import useKeyboardNav from './hooks/useKeyboardNav.js'
-import { useTheme } from './context/ThemeContext.jsx'
+import Navbar from './components/Navbar'
+import Hero from './components/Hero'
+import MainContent from './components/MainContent'
+import ArcBackground from './components/ArcBackground'
+import Seo from './components/Seo'
+import useKeyboardNav from './hooks/useKeyboardNav'
+import { useTheme } from './context/ThemeContext'
 
 /**
  * App
@@ -13,7 +13,7 @@ import { useTheme } from './context/ThemeContext.jsx'
  *   • flat SVG arc background (decorative, behind everything)
  *   • sticky top nav bar (no sidebar)
  *   • centered content: Hero identity header + MainContent sections
- * The theme provider lives one level up in main.jsx.
+ * The theme provider lives one level up in main.tsx.
  */
 export default function App() {
   const { toggleTheme } = useTheme()

@@ -1,7 +1,8 @@
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Plus, Minus } from 'lucide-react'
-import AwardItem from './AwardItem.jsx'
+import AwardItem from './AwardItem'
+import type { Award } from '../config/data'
 
 /**
  * AwardsList
@@ -11,7 +12,7 @@ import AwardItem from './AwardItem.jsx'
  *   • the rest collapse behind a "+ N more" button that expands them inline
  *     (no popup/modal). The button toggles between "+ N more" and "Show less".
  */
-export default function AwardsList({ awards = [] }) {
+export default function AwardsList({ awards = [] }: { awards?: Award[] }) {
   const [expanded, setExpanded] = useState(false)
 
   const shown = awards.filter((a) => a.highlight)

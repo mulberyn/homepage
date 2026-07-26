@@ -1,3 +1,5 @@
+import type { ReactNode } from 'react'
+
 /**
  * TimelineList
  * -------------------------------------------------------------------------
@@ -7,6 +9,6 @@
  * last node — no trailing tail. `space-y-7` (1.75rem) MUST match the gap used
  * in each item's connector height calc.
  */
-export default function TimelineList({ children }) {
+export default function TimelineList({ children }: { children: ReactNode }) {
   return <ul className="space-y-7">{children}</ul>
 }

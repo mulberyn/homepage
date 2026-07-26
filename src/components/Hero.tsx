@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion'
 import { Github, Twitter, Linkedin, GraduationCap, Mail } from 'lucide-react'
-import { userData } from '../config/data.js'
+import type { LucideIcon } from 'lucide-react'
+import { userData } from '../config/data'
 
 /**
  * Hero
@@ -9,7 +10,7 @@ import { userData } from '../config/data.js'
  * "@handle" GitHub link, title, and social links. Centered, warm, compact.
  */
 
-const SOCIAL_ICONS = {
+const SOCIAL_ICONS: Record<string, LucideIcon> = {
   github: Github,
   twitter: Twitter,
   linkedin: Linkedin,
@@ -20,7 +21,8 @@ const SOCIAL_ICONS = {
 function SocialLinks() {
   const socials = userData.socials || {}
   const entries = Object.entries(socials).filter(
-    ([key, val]) => val && SOCIAL_ICONS[key]
+    (entry): entry is [string, string] =>
+      Boolean(entry[1]) && Boolean(SOCIAL_ICONS[entry[0]])
   )
   if (entries.length === 0) return null
 

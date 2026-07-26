@@ -4,6 +4,9 @@ import {
   useEffect,
   useMemo,
   useState,
+  type Dispatch,
+  type ReactNode,
+  type SetStateAction,
 } from 'react'
 
 /**
@@ -17,9 +20,18 @@ import {
  * <html> in sync with state and persists the choice to localStorage.
  */
 
-const ThemeContext = createContext(null)
+export type Theme = 'light' | 'dark'
 
-const getInitialTheme = () => {
+export interface ThemeContextValue {
+  theme: Theme
+  isDark: boolean
+  toggleTheme: () => void
+  setTheme: Dispatch<SetStateAction<Theme>>
+}
+
+const ThemeContext = createContext<ThemeContextValue | null>(null)
+
+const getInitialTheme = (): Theme => {
   try {
     const saved = localStorage.getItem('theme')
     if (saved === 'light' || saved === 'dark') return saved
@@ -31,8 +43,8 @@ const getInitialTheme = () => {
   }
 }
 
-export function ThemeProvider({ children }) {
-  const [theme, setTheme] = useState(getInitialTheme)
+export function ThemeProvider({ children }: { children: ReactNode }) {
+  const [theme, setTheme] = useState<Theme>(getInitialTheme)
 
   // Reflect theme -> <html data-theme> + persist.
   useEffect(() => {
@@ -44,7 +56,7 @@ export function ThemeProvider({ children }) {
     }
   }, [theme])
 
-  const value = useMemo(
+  const value = useMemo<ThemeContextValue>(
     () => ({
       theme,
       isDark: theme === 'dark',
@@ -61,7 +73,7 @@ export function ThemeProvider({ children }) {
 }
 
 // Convenience hook. Throws if used outside the provider to catch mistakes early.
-export function useTheme() {
+export function useTheme(): ThemeContextValue {
   const ctx = useContext(ThemeContext)
   if (!ctx) {
     throw new Error('useTheme must be used within a <ThemeProvider>')

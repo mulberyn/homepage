@@ -1,15 +1,22 @@
 import { motion } from 'framer-motion'
 import { FileText, Github, ExternalLink, BookOpen, Quote } from 'lucide-react'
+import type { LucideIcon } from 'lucide-react'
+import type { Publication } from '../config/data'
 
 /**
  * PublicationItem
  * -------------------------------------------------------------------------
  * One publication rendered as a vertical-timeline entry (node on the parent
  * <TimelineList>'s dashed line). Shows venue · year, title, authors, and a row
- * of link buttons built from the `links` object in data.js.
+ * of link buttons built from the `links` object in data.ts.
  */
 
-const LINK_META = {
+interface LinkMeta {
+  icon: LucideIcon
+  label: string
+}
+
+const LINK_META: Record<string, LinkMeta> = {
   pdf: { icon: FileText, label: 'PDF' },
   code: { icon: Github, label: 'Code' },
   project: { icon: ExternalLink, label: 'Project' },
@@ -17,11 +24,21 @@ const LINK_META = {
   bibtex: { icon: Quote, label: 'BibTeX' },
 }
 
-const titleCase = (s) => s.charAt(0).toUpperCase() + s.slice(1)
+const titleCase = (s: string) => s.charAt(0).toUpperCase() + s.slice(1)
 
-export default function PublicationItem({ publication, isLast }) {
+interface PublicationItemProps {
+  publication: Publication
+  isLast?: boolean
+}
+
+export default function PublicationItem({
+  publication,
+  isLast,
+}: PublicationItemProps) {
   const { title, authors, venue, year, links = {} } = publication
-  const linkEntries = Object.entries(links).filter(([, url]) => url)
+  const linkEntries = Object.entries(links).filter(
+    (entry): entry is [string, string] => Boolean(entry[1])
+  )
 
   return (
     <motion.li
@@ -54,7 +71,7 @@ export default function PublicationItem({ publication, isLast }) {
       {linkEntries.length > 0 && (
         <div className="mt-2 flex flex-wrap gap-2">
           {linkEntries.map(([key, url]) => {
-            const meta = LINK_META[key] || {
+            const meta = LINK_META[key] ?? {
               icon: ExternalLink,
               label: titleCase(key),
             }
