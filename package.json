@@ -1,7 +1,7 @@
 {
   "name": "academic-homepage",
   "private": true,
-  "version": "4.2.0",
+  "version": "4.2.1",
   "type": "module",
   "description": "A warm, fresh (小清新) personal academic homepage built with React + Vite + Tailwind + Framer Motion.",
   "homepage": "https://<username>.github.io/<repository-name>/",

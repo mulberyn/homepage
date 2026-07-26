@@ -4,6 +4,18 @@ All notable changes to this project are documented here. The format is based on
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and this project
 adheres to [Semantic Versioning](https://semver.org/).
 
+## [4.2.1] — Brand anchored to the nav's far left
+
+### Changed
+
+- **Brand position** — the cursive "mulberyn" moved from beside the links to
+  the bar's far-left grid column, inset 69px on desktop so its left edge
+  lines up with the sidebar avatar's left edge below. The section links now
+  form their own page-centered group, leaving a wide natural gap after the
+  brand while the spacing between links is unchanged.
+
+---
+
 ## [4.2.0] — Nav spacing, contact rows, full-width underline
 
 ### Changed

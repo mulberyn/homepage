@@ -7,14 +7,16 @@ import ThemeToggle from './ThemeToggle'
  * TopNav
  * -------------------------------------------------------------------------
  * The sticky top navigation bar, shown at every screen size, separated from
- * the content by a warm hairline (border-bottom). Its content is a centered
- * group: the cursive "mulberyn" brand (written out once on load — see
- * .brand-write) on the left, with the five section links right after it.
- * The theme toggle sits at the bar's right edge.
+ * the content by a warm hairline (border-bottom). The cursive "mulberyn"
+ * brand (written out once on load — see .brand-write) sits at the bar's far
+ * left, inset on desktop so its left edge roughly lines up with the sidebar
+ * avatar below. The five section links form their own centered group — far
+ * from the brand by construction — and the theme toggle sits at the right
+ * edge.
  *
- * Centering: a 3-column grid (1fr | auto | 1fr) keeps the brand + links
- * group truly centered in the page while the toggle lives in the right
- * column — no overlap, no off-center drift.
+ * Centering: a 3-column grid (1fr | auto | 1fr) keeps the link group truly
+ * centered in the page while the brand and toggle live in the outer
+ * columns — no overlap, no off-center drift.
  *
  * The active link is highlighted with the accent text color and a small dot
  * beneath it. Each link owns its own dot — nothing slides between items, so
@@ -38,13 +40,10 @@ export default function TopNav() {
         aria-label="Sections"
         className="mx-auto grid h-16 w-full max-w-[1240px] grid-cols-[1fr_auto_1fr] items-center px-4 sm:px-8"
       >
-        {/* Left spacer — balances the toggle column so the middle group is
-            centered relative to the page, not just the leftover space. */}
-        <span aria-hidden />
-
-        {/* Centered group: brand on the left, section links right after,
-            with a clear breathing gap between the two. */}
-        <div className="flex min-w-0 items-center gap-4 sm:gap-8">
+        {/* Brand at the far left. The desktop inset (side:pl) nudges its
+            left edge to roughly match the sidebar avatar's left edge below
+            (avatar ring starts ~69px into the 270px sidebar column). */}
+        <div className="flex justify-start side:pl-[69px]">
           <a
             href="#top"
             onClick={(e) => {
@@ -55,7 +54,11 @@ export default function TopNav() {
           >
             {userData.githubHandle || 'mulberyn'}
           </a>
+        </div>
 
+        {/* Centered link group — the wide gap to the brand falls out of the
+            grid naturally; spacing BETWEEN the links is unchanged. */}
+        <div className="flex min-w-0 items-center">
           <ul className="scrollbar-none -mx-1 flex min-w-0 items-center gap-1 overflow-x-auto px-1">
             {userData.navItems.map((item) => {
               const isActive = active === item.id
