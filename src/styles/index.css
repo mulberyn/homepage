@@ -1,0 +1,175 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ==========================================================================
+   THEME SYSTEM — warm, fresh, "小清新" (xiao qing xin)
+   --------------------------------------------------------------------------
+   Every color is a CSS custom property. This is a LIGHT-ONLY design with an
+   optional warmer "creamy" variant. One attribute on <html> drives it:
+       data-theme = "light" | "warm"
+   No heavy gradients — flat, solid, warm pastel colors only.
+   ========================================================================== */
+
+:root {
+  color-scheme: light;
+
+  /* ---- Light / Fresh (default) ---- */
+  --color-bg: #fffaf7; /* creamy white page background */
+  --color-bg-alt: #fdf8f5; /* very slightly warmer */
+  --color-bg-card: #ffffff; /* white cards */
+  --color-surface: #fdf0ec; /* soft warm blush chips */
+  --color-border: #f2e6de; /* warm hairline */
+
+  /* Accent: warm coral / peach (NOT purple). */
+  --color-primary: #e88f7a;
+  --color-primary-soft: #f0a090;
+
+  /* Text: dark warm gray. */
+  --color-text-primary: #3d3d3d;
+  --color-text-secondary: #6b6b6b;
+  --color-text-muted: #9a938e;
+
+  /* Soft pastel section tints (used sparingly on alternating panels). */
+  --tint-peach: #fce8e0;
+  --tint-sky: #e8f4f8;
+  --tint-mint: #eaf5ef;
+  --tint-blush: #fdf0ec;
+
+  /* Decorative arc colors (very low opacity flat arcs). */
+  --arc-1: #f4c9a0; /* warm yellow */
+  --arc-2: #e88f7a; /* coral */
+  --arc-3: #a9d4e0; /* soft sky */
+
+  /* Fluorescent-free, soft coral highlighter for **bolded** bio words. */
+  --highlight: linear-gradient(
+    180deg,
+    transparent 58%,
+    rgba(232, 143, 122, 0.28) 58%
+  );
+}
+
+/* ---- Creamy Warm variant ---- */
+[data-theme='warm'] {
+  --color-bg: #fbf1e9; /* toastier cream */
+  --color-bg-alt: #f8ece2;
+  --color-bg-card: #fff8f2;
+  --color-surface: #f6e2d6;
+  --color-border: #eeddcf;
+  --color-primary: #e0836e;
+  --color-primary-soft: #eaa088;
+  --color-text-primary: #423b36;
+  --color-text-secondary: #6f645c;
+  --color-text-muted: #a1958c;
+  --tint-peach: #fbe2d6;
+  --tint-sky: #e4f0f2;
+  --tint-mint: #e6f1e8;
+  --tint-blush: #fbeae1;
+  --arc-1: #f0be93;
+  --arc-2: #e0836e;
+  --arc-3: #a3cdd8;
+  --highlight: linear-gradient(
+    180deg,
+    transparent 58%,
+    rgba(224, 131, 110, 0.3) 58%
+  );
+}
+
+/* ==========================================================================
+   BASE STYLES
+   ========================================================================== */
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    /* Offset anchor targets so headings clear the sticky top nav bar. */
+    scroll-padding-top: 96px;
+  }
+
+  body {
+    @apply bg-bg text-text-primary font-serif antialiased;
+    transition: background-color 0.4s ease, color 0.4s ease;
+  }
+
+  /* Headings use the clean sans (Inter). */
+  h1,
+  h2,
+  h3 {
+    @apply font-sans;
+  }
+
+  /* Soft coral highlighter for **bolded** words in the bio. */
+  .highlight {
+    background-image: var(--highlight);
+    padding: 0 0.12em;
+    border-radius: 0.15em;
+    font-weight: 600;
+    color: inherit;
+  }
+
+  /* Accessibility: a clear, warm focus ring for keyboard users only. */
+  :focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+}
+
+/* ==========================================================================
+   PRINT STYLES — clean, ink-friendly CV printout.
+   ========================================================================== */
+@media print {
+  :root,
+  [data-theme='warm'] {
+    --color-bg: #ffffff;
+    --color-bg-alt: #ffffff;
+    --color-bg-card: #ffffff;
+    --tint-peach: #fff;
+    --tint-sky: #fff;
+    --tint-mint: #fff;
+    --tint-blush: #fff;
+    --color-text-primary: #000;
+    --color-text-secondary: #222;
+  }
+  nav,
+  button,
+  [aria-hidden='true'] {
+    display: none !important;
+  }
+  body {
+    background: #fff !important;
+  }
+  .shadow-soft,
+  .shadow-lift {
+    box-shadow: none !important;
+  }
+}
+
+/* Respect users who prefer reduced motion: kill decorative animations. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Subtle, warm custom scrollbar. */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-border);
+  border-radius: 999px;
+  border: 2px solid var(--color-bg);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-primary-soft);
+}

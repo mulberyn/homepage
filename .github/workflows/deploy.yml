@@ -1,0 +1,53 @@
+name: Deploy to GitHub Pages
+
+# Build the site and publish it to the `gh-pages` branch on every push to the
+# main (or master) branch. GitHub Pages then serves that branch.
+on:
+  push:
+    branches: [main, master]
+  # Allow manually re-running the deploy from the Actions tab.
+  workflow_dispatch:
+
+# Permissions needed for the built-in GITHUB_TOKEN to push to gh-pages.
+permissions:
+  contents: write
+
+# If you push twice quickly, cancel the older in-progress run.
+concurrency:
+  group: pages-deploy
+  cancel-in-progress: true
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build
+        # IMPORTANT: set the base path to "/<repository-name>/" so asset URLs
+        # resolve correctly on GitHub Pages. github.event.repository.name is the
+        # repo name automatically — no manual editing required.
+        #
+        # Using a USER site (<username>.github.io) or a custom domain? Replace
+        # the line below with:   run: npm run build   env: VITE_BASE_URL: "/"
+        run: npm run build
+        env:
+          VITE_BASE_URL: "/${{ github.event.repository.name }}/"
+
+      - name: Deploy to gh-pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./dist
+          # Uncomment the next line if you use a custom domain (CNAME file):
+          # cname: www.your-domain.com

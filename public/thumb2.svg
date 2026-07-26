@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="240" height="180" viewBox="0 0 240 180">
+  <rect width="240" height="180" fill="#e8f4f8"/>
+  <g fill="#5b93a6" font-family="Inter, sans-serif" font-size="15" font-weight="600" text-anchor="middle">
+    <text x="120" y="98">Figure</text>
+  </g>
+  <g fill="#a9d4e0">
+    <circle cx="70" cy="120" r="10"/>
+    <circle cx="120" cy="70" r="14"/>
+    <circle cx="175" cy="110" r="8"/>
+  </g>
+</svg>

@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="240" height="180" viewBox="0 0 240 180">
+  <rect width="240" height="180" fill="#fce8e0"/>
+  <g fill="#e88f7a" font-family="Inter, sans-serif" font-size="15" font-weight="600" text-anchor="middle">
+    <text x="120" y="98">Figure</text>
+  </g>
+  <g stroke="#f0a090" stroke-width="2.5" fill="none">
+    <path d="M40 130 L90 90 L130 110 L200 55"/>
+  </g>
+</svg>
