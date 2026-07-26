@@ -15,31 +15,34 @@ export default function ArcBackground() {
       aria-hidden
       className="pointer-events-none fixed inset-0 -z-10 overflow-hidden"
     >
-      {/* Top-right sweeping arcs */}
+      {/* Top-right sweeping arcs. Opacity is theme-aware (see --arc-opacity):
+          clearly visible in light mode, subtle in dark. */}
       <svg
-        className="absolute -right-24 -top-32 h-[70vh] w-[70vh] opacity-[0.08] motion-safe:animate-drift-slow"
+        className="absolute -right-24 -top-32 h-[70vh] w-[70vh] motion-safe:animate-drift-slow"
+        style={{ opacity: 'var(--arc-opacity)' }}
         viewBox="0 0 400 400"
         fill="none"
       >
-        <circle cx="200" cy="200" r="180" stroke="var(--arc-2)" strokeWidth="2" />
-        <circle cx="200" cy="200" r="140" stroke="var(--arc-1)" strokeWidth="2" />
-        <circle cx="200" cy="200" r="100" stroke="var(--arc-3)" strokeWidth="2" />
+        <circle cx="200" cy="200" r="180" stroke="var(--arc-2)" strokeWidth="2.5" />
+        <circle cx="200" cy="200" r="140" stroke="var(--arc-1)" strokeWidth="2.5" />
+        <circle cx="200" cy="200" r="100" stroke="var(--arc-3)" strokeWidth="2.5" />
       </svg>
 
       {/* Bottom-left overlapping circles */}
       <svg
-        className="absolute -bottom-40 -left-32 h-[60vh] w-[60vh] opacity-[0.09] motion-safe:animate-drift-slow"
-        style={{ animationDelay: '-8s' }}
+        className="absolute -bottom-40 -left-32 h-[60vh] w-[60vh] motion-safe:animate-drift-slow"
+        style={{ opacity: 'var(--arc-opacity)', animationDelay: '-8s' }}
         viewBox="0 0 400 400"
         fill="none"
       >
-        <circle cx="160" cy="240" r="150" stroke="var(--arc-1)" strokeWidth="2" />
-        <circle cx="240" cy="180" r="150" stroke="var(--arc-3)" strokeWidth="2" />
+        <circle cx="160" cy="240" r="150" stroke="var(--arc-1)" strokeWidth="2.5" />
+        <circle cx="240" cy="180" r="150" stroke="var(--arc-3)" strokeWidth="2.5" />
       </svg>
 
-      {/* A single wide, soft wave arc across the middle */}
+      {/* A single wide, soft wave arc across the middle (slightly subtler) */}
       <svg
-        className="absolute left-0 top-1/3 h-[40vh] w-full opacity-[0.06]"
+        className="absolute left-0 top-1/3 h-[40vh] w-full"
+        style={{ opacity: 'calc(var(--arc-opacity) * 0.7)' }}
         viewBox="0 0 1200 400"
         preserveAspectRatio="none"
         fill="none"

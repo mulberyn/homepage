@@ -1,36 +1,44 @@
 import { motion } from 'framer-motion'
-import { Award } from 'lucide-react'
+import { Medal } from 'lucide-react'
 
 /**
  * AwardItem
  * -------------------------------------------------------------------------
- * A single honor/award row. The date sits in a mono "pill" on the left.
+ * A single award — a clean, flat row (no card). The medal icon is colored by
+ * `medal`: gold medals get a gold icon, silver medals a silver/gray icon.
  */
-export default function AwardItem({ date, title, organization }) {
+
+// Explicit medal colors (not theme accent) so gold ≠ silver in both modes.
+const MEDAL_COLOR = {
+  gold: '#d9a520', // warm gold
+  silver: '#9ca3af', // cool silver/gray
+}
+
+export default function AwardItem({ title, date, medal = 'silver', highlight }) {
   return (
     <motion.li
-      className="group flex items-center gap-4 rounded-xl border border-border bg-bg-card px-4 py-3 shadow-soft transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lift"
-      initial={{ opacity: 0, y: 12 }}
+      className="flex items-center gap-3.5 py-3"
+      initial={{ opacity: 0, y: 8 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.4 }}
-      transition={{ duration: 0.4, ease: 'easeOut' }}
+      transition={{ duration: 0.35, ease: 'easeOut' }}
     >
-      <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-surface text-primary transition-colors duration-300 group-hover:bg-primary group-hover:text-white">
-        <Award size={18} strokeWidth={2.2} />
-      </span>
-
-      <div className="min-w-0 flex-1">
-        <h3 className="truncate font-sans font-bold text-text-primary">
-          {title}
-        </h3>
-        {organization && (
-          <p className="truncate text-sm text-text-secondary">
-            {organization}
-          </p>
-        )}
-      </div>
-
-      <span className="shrink-0 rounded-full bg-surface px-3 py-1 font-sans text-xs font-semibold text-primary">
+      <Medal
+        size={18}
+        strokeWidth={2.2}
+        className="shrink-0"
+        style={{ color: MEDAL_COLOR[medal] || MEDAL_COLOR.silver }}
+      />
+      <h3
+        className={`min-w-0 flex-1 truncate font-sans text-sm ${
+          highlight
+            ? 'font-semibold text-text-primary'
+            : 'font-medium text-text-secondary'
+        }`}
+      >
+        {title}
+      </h3>
+      <span className="shrink-0 font-sans text-xs font-medium text-text-muted">
         {date}
       </span>
     </motion.li>

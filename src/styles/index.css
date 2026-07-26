@@ -3,25 +3,26 @@
 @tailwind utilities;
 
 /* ==========================================================================
-   THEME SYSTEM — warm, fresh, "小清新" (xiao qing xin)
+   THEME SYSTEM — warm & cozy, Light / Dark
    --------------------------------------------------------------------------
-   Every color is a CSS custom property. This is a LIGHT-ONLY design with an
-   optional warmer "creamy" variant. One attribute on <html> drives it:
-       data-theme = "light" | "warm"
-   No heavy gradients — flat, solid, warm pastel colors only.
+   Every color is a CSS custom property, so the light/dark switch happens
+   instantly by swapping variables. One attribute on <html> drives it:
+       data-theme = "light" | "dark"
+   Both modes are WARM — no cold grays, no heavy gradients.
    ========================================================================== */
 
 :root {
   color-scheme: light;
 
-  /* ---- Light / Fresh (default) ---- */
-  --color-bg: #fffaf7; /* creamy white page background */
-  --color-bg-alt: #fdf8f5; /* very slightly warmer */
-  --color-bg-card: #ffffff; /* white cards */
-  --color-surface: #fdf0ec; /* soft warm blush chips */
-  --color-border: #f2e6de; /* warm hairline */
+  /* ---- Light (default) — warm off-white ---- */
+  --color-bg: #fdf8f5; /* warm off-white page background */
+  --color-bg-alt: #fbf3ee;
+  --color-bg-card: #ffffff;
+  --color-surface: #f7ebe4; /* soft warm chip background */
+  --color-border: #efe2d9; /* warm hairline (chips, cards) */
+  --divider: #e3d3c6; /* stronger warm divider between sections */
 
-  /* Accent: warm coral / peach (NOT purple). */
+  /* Accent: warm coral / peach. */
   --color-primary: #e88f7a;
   --color-primary-soft: #f0a090;
 
@@ -30,49 +31,41 @@
   --color-text-secondary: #6b6b6b;
   --color-text-muted: #9a938e;
 
-  /* Soft pastel section tints (used sparingly on alternating panels). */
-  --tint-peach: #fce8e0;
-  --tint-sky: #e8f4f8;
-  --tint-mint: #eaf5ef;
-  --tint-blush: #fdf0ec;
-
-  /* Decorative arc colors (very low opacity flat arcs). */
+  /* Decorative arc colors + opacity. In LIGHT mode the arcs are clearly
+     noticeable (12%); dark mode dials them back (see the dark block). */
   --arc-1: #f4c9a0; /* warm yellow */
   --arc-2: #e88f7a; /* coral */
-  --arc-3: #a9d4e0; /* soft sky */
+  --arc-3: #e6b89c; /* soft peach */
+  --arc-opacity: 0.12;
 
-  /* Fluorescent-free, soft coral highlighter for **bolded** bio words. */
-  --highlight: linear-gradient(
-    180deg,
-    transparent 58%,
-    rgba(232, 143, 122, 0.28) 58%
-  );
+  /* Soft coral highlighter color for **bolded** bio words (drawn as a bar). */
+  --highlight-color: rgba(232, 143, 122, 0.32);
 }
 
-/* ---- Creamy Warm variant ---- */
-[data-theme='warm'] {
-  --color-bg: #fbf1e9; /* toastier cream */
-  --color-bg-alt: #f8ece2;
-  --color-bg-card: #fff8f2;
-  --color-surface: #f6e2d6;
-  --color-border: #eeddcf;
-  --color-primary: #e0836e;
-  --color-primary-soft: #eaa088;
-  --color-text-primary: #423b36;
-  --color-text-secondary: #6f645c;
-  --color-text-muted: #a1958c;
-  --tint-peach: #fbe2d6;
-  --tint-sky: #e4f0f2;
-  --tint-mint: #e6f1e8;
-  --tint-blush: #fbeae1;
-  --arc-1: #f0be93;
-  --arc-2: #e0836e;
-  --arc-3: #a3cdd8;
-  --highlight: linear-gradient(
-    180deg,
-    transparent 58%,
-    rgba(224, 131, 110, 0.3) 58%
-  );
+/* ---- Dark — warm dark gray, muted warm accent ---- */
+[data-theme='dark'] {
+  color-scheme: dark;
+
+  --color-bg: #2d2a26; /* warm dark gray, not cold black */
+  --color-bg-alt: #322e29;
+  --color-bg-card: #35302a;
+  --color-surface: #3b352e;
+  --color-border: #443d34;
+  --divider: #4d4439; /* stronger warm divider between sections */
+
+  --color-primary: #d4a08a; /* muted warm accent */
+  --color-primary-soft: #e0b39d;
+
+  --color-text-primary: #f5eee8; /* light cream */
+  --color-text-secondary: #cdc3b8;
+  --color-text-muted: #9a9086;
+
+  --arc-1: #d4a08a;
+  --arc-2: #c98d76;
+  --arc-3: #b98f6f;
+  --arc-opacity: 0.05; /* keep decorations subtle in dark mode */
+
+  --highlight-color: rgba(212, 160, 138, 0.34);
 }
 
 /* ==========================================================================
@@ -88,23 +81,57 @@
 
   body {
     @apply bg-bg text-text-primary font-serif antialiased;
+    /* Letter-like reading comfort: ~17px body with a generous 1.8 line-height
+       and kerning/ligatures on for polished long-form reading. */
+    font-size: 17px;
+    line-height: 1.8;
+    text-rendering: optimizeLegibility;
+    font-feature-settings: 'kern', 'liga';
     transition: background-color 0.4s ease, color 0.4s ease;
   }
 
-  /* Headings use the clean sans (Inter). */
+  /* Headings use the clean sans (Inter): crisp line-height, a hair of
+     negative tracking so large text reads tight but not cramped, and balanced
+     wrapping so multi-line headings never leave a lonely last word. */
   h1,
   h2,
   h3 {
     @apply font-sans;
+    line-height: 1.25;
+    letter-spacing: -0.01em;
+    text-wrap: balance;
   }
 
-  /* Soft coral highlighter for **bolded** words in the bio. */
+  /* Soft coral marker for **bolded** words in the bio (mem.ac style).
+     An inset box-shadow paints a gentle band across the lower part of the text
+     so the highlight hugs the baseline and feels integrated — not a detached
+     underline sitting far below. */
   .highlight {
-    background-image: var(--highlight);
-    padding: 0 0.12em;
-    border-radius: 0.15em;
+    box-shadow: inset 0 -0.34em 0 var(--highlight-color);
+    border-radius: 1px;
     font-weight: 600;
     color: inherit;
+  }
+
+  /* Handwriting reveal for the cursive brand logo in the nav. A soft-edged
+     gradient mask (3× the element's width) starts fully covering the text and
+     sweeps left, uncovering the script from the first letter to the last like
+     a pen writing it out. Plays once on load (~2.4s), then the text stays
+     fully visible (`both` keeps the end state). Under prefers-reduced-motion
+     the global override collapses the duration, so the text simply appears. */
+  .brand-write {
+    /* Stop math (mask is 3× the element, position animates 100% → 0%, so the
+       element's window slides from the right third to the left third of the
+       gradient): transparent must start by 66.7% so the text begins fully
+       hidden, and solid must reach 33.3% so it ends fully visible. 36%/56%
+       gives a crisp but soft writing edge (~60% of the word wide). */
+    -webkit-mask-image: linear-gradient(100deg, #000 36%, transparent 56%);
+    mask-image: linear-gradient(100deg, #000 36%, transparent 56%);
+    -webkit-mask-size: 300% 100%;
+    mask-size: 300% 100%;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    animation: brand-write 2.4s cubic-bezier(0.65, 0, 0.35, 1) 0.15s both;
   }
 
   /* Accessibility: a clear, warm focus ring for keyboard users only. */
@@ -115,19 +142,28 @@
   }
 }
 
+/* Mask-position sweep: 100% shows the transparent end of the gradient
+   (text hidden), 0% shows the solid end (text fully written out). */
+@keyframes brand-write {
+  from {
+    -webkit-mask-position: 100% 0;
+    mask-position: 100% 0;
+  }
+  to {
+    -webkit-mask-position: 0% 0;
+    mask-position: 0% 0;
+  }
+}
+
 /* ==========================================================================
    PRINT STYLES — clean, ink-friendly CV printout.
    ========================================================================== */
 @media print {
   :root,
-  [data-theme='warm'] {
+  [data-theme='dark'] {
     --color-bg: #ffffff;
     --color-bg-alt: #ffffff;
     --color-bg-card: #ffffff;
-    --tint-peach: #fff;
-    --tint-sky: #fff;
-    --tint-mint: #fff;
-    --tint-blush: #fff;
     --color-text-primary: #000;
     --color-text-secondary: #222;
   }

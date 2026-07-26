@@ -6,177 +6,177 @@
 //
 //  TIPS
 //   • Arrays render in order — put the newest / most important item first.
-//   • Any field you leave as an empty string ("") or remove from a `links`
-//     object is simply hidden. Nothing breaks.
+//   • Any field you leave as an empty string ("") or remove is simply hidden.
 //   • Images: put files in the /public folder and reference them as
-//     "/avatar.jpg", "/thumb1.jpg", etc. (the leading slash is important).
-//   • In the `about` text, wrap words in **double asterisks** to give them the
-//     fluorescent highlighter effect.
+//     "/avatar.jpg", "/zjut-logo.svg", etc. (the leading slash is important).
+//   • In the `about` text, wrap words in **double asterisks** to highlight them.
 // =============================================================================
 
 export const userData = {
   // --- Personal ---------------------------------------------------------------
-  name: 'Ada Lovelace',
-  title: 'PhD Candidate · Machine Learning',
-  affiliation: 'University of Example',
-  email: 'ada@example.edu',
+  name: "Zhang Sheng",
+  title: "CS Student / Competitive Programmer",
+  email: "mulberyn@gmail.com",
 
   // Avatar image. A placeholder ships in /public/avatar.svg — replace it with
   // your own photo (e.g. drop /public/avatar.jpg and set avatar: '/avatar.jpg').
-  // Square images work best. A full URL to a hosted image also works.
-  avatar: '/avatar.svg',
+  avatar: "/avatar.svg",
 
-  // Social / academic profile links. Delete any you don't use — the icon for a
-  // missing/empty link is hidden automatically.
+  // GitHub handle shown under your name (rendered as "@handle", links to the URL
+  // in a new tab).
+  githubHandle: "mulberyn",
+  githubUrl: "https://github.com/mulberyn",
+
+  // Social / academic profile links. Delete any you don't use — a missing/empty
+  // link hides its icon automatically.
   socials: {
-    github: 'https://github.com/yourusername',
-    twitter: 'https://twitter.com/yourhandle',
-    linkedin: 'https://linkedin.com/in/yourprofile',
-    scholar: 'https://scholar.google.com/citations?user=XXXX',
-    email: 'ada@example.edu', // shown as an email icon in the sidebar
+    github: "https://github.com/mulberyn",
+    twitter: "",
+    linkedin: "",
+    scholar: "",
+    email: "mulberyn@gmail.com",
   },
 
   // --- SEO / Social sharing ---------------------------------------------------
-  // Used to fill in the page <title>, meta description, Open Graph / Twitter
-  // cards, and JSON-LD structured data (so search engines & social sites show
-  // a rich preview). All optional — sensible fallbacks are used if omitted.
+  // Fills in the page <title>, meta description, Open Graph / Twitter cards, and
+  // JSON-LD structured data. All optional — sensible fallbacks are used.
   seo: {
-    // Full public URL of your deployed site (used for canonical + OG url).
-    // e.g. 'https://username.github.io/repository-name/'
-    siteUrl: 'https://example.github.io/academic-homepage/',
-    // Short description for search results & social cards (~150 chars).
+    siteUrl: "https://mulberyn.github.io/homepage/",
     description:
-      'Personal academic homepage of Ada Lovelace — PhD candidate researching ' +
-      'machine learning and representation learning at the University of Example.',
-    // Preview image for social shares (put a 1200×630 image in /public).
-    // Falls back to the avatar if left empty.
-    ogImage: '/avatar.svg',
-    // Keywords for the meta keywords tag (optional).
-    keywords: ['machine learning', 'representation learning', 'research', 'PhD'],
-    // Page language (BCP-47 code) — also set on <html lang>.
-    lang: 'en',
-    // Twitter handle (without the URL) for Twitter card attribution.
-    twitterHandle: '@yourhandle',
+      "Personal homepage of Zhang Sheng (@mulberyn) — CS student and " +
+      "competitive programmer (ICPC / CCPC medalist), ZJUT → Peking University.",
+    ogImage: "/avatar.svg",
+    keywords: [
+      "competitive programming",
+      "ICPC",
+      "CCPC",
+      "algorithms",
+      "computer science",
+    ],
+    lang: "en",
+    twitterHandle: "",
   },
 
   // --- About ------------------------------------------------------------------
   // A short bio. Wrap words in **double asterisks** to highlight them.
   about:
-    "I am a PhD candidate at the **University of Example**, where I study " +
-    'machine learning with a focus on **representation learning** and its ' +
-    'applications to scientific discovery. My work sits at the intersection of ' +
-    'theory and practice: I care about models that are both **principled** and ' +
-    'genuinely useful.\n\n' +
-    'Before my PhD, I completed a B.Sc. in Computer Science and spent two years ' +
-    'building data infrastructure in industry. Outside of research I enjoy ' +
-    'typography, long-distance running, and playing the cello.',
+    "I am a Computer Science student and competitive programmer. I earned my bachelor's degree at Zhejiang University of Technology (Experimental Class) and am beginning my master's at Peking University.\n\n" +
+    "I enjoy algorithms, problem solving, and building clean solutions. I am deeply interested in AGI and LLMs, and I am continuously exploring and learning about computer science and AI.",
 
   // --- Education --- (array) ---------------------------------------------------
+  // Each entry shows a small school logo (put images in /public).
   education: [
     {
-      date: '2021 – Present',
-      title: 'Ph.D. in Computer Science',
-      institution: 'University of Example',
-      description:
-        'Advised by Prof. Jane Doe. Thesis on self-supervised representation ' +
-        'learning for scientific data.',
+      school: "Peking University",
+      logo: "/images/pku-logo.svg",
+      major:
+        "Electronics & Information — School of Software and Microelectronics",
+      degree: "M.E.",
+      dates: "2026.09 – Present",
     },
     {
-      date: '2017 – 2021',
-      title: 'B.Sc. in Computer Science',
-      institution: 'Institute of Technology',
-      description: 'Graduated with First-Class Honours. Minor in Mathematics.',
+      school: "Zhejiang University of Technology",
+      logo: "/images/zjut-logo.svg",
+      major: "Computer Science and Technology (Experimental Class)",
+      degree: "B.E.",
+      dates: "2022.09 – 2026.07",
     },
   ],
 
-  // --- Experience --- (array) --------------------------------------------------
+  // --- Experience --- (array, newest first) ------------------------------------
   experience: [
     {
-      date: '2024 – Present',
-      title: 'Research Intern',
-      company: 'Example AI Lab',
+      date: "2025 – Present",
+      title: "Algorithm / Software Intern",
+      company: "Example Tech",
       description:
-        'Working on scalable pre-training methods for multimodal foundation ' +
-        'models.',
+        "Applying algorithmic problem-solving to real-world systems. Replace " +
+        "this with your own experience.",
     },
     {
-      date: 'Summer 2023',
-      title: 'Applied Scientist Intern',
-      company: 'Tech Corp',
+      date: "Summer 2024",
+      title: "Backend Engineering Intern",
+      company: "Example Startup",
       description:
-        'Built an internal tool for large-scale experiment tracking now used ' +
-        'across three teams.',
+        "Built internal tooling and services. Replace with your own experience.",
     },
   ],
 
-  // --- Publications --- (array) ------------------------------------------------
-  // `thumbnail` is optional (put images in /public). Any link left out of the
-  // `links` object is hidden. Common keys: pdf, code, project, arxiv, bibtex.
+  // --- Publications --- (array, newest first) ----------------------------------
+  // Any link left out of `links` is hidden. Common keys: pdf, code, project.
   publications: [
     {
-      title:
-        'Principled Representation Learning for Scientific Discovery',
-      authors: 'Ada Lovelace, Jane Doe, John Smith',
-      venue: 'NeurIPS',
-      year: '2025',
-      thumbnail: '/thumb1.svg', // optional — put images in /public
+      title: "Sample Publication Title — replace or remove me",
+      authors: "Zhang Sheng, Co-author A, Co-author B",
+      venue: "Conference",
+      year: "2025",
       links: {
-        pdf: '#',
-        code: '#',
-        project: '#',
+        pdf: "#",
+        code: "#",
       },
     },
     {
-      title: 'On the Geometry of Self-Supervised Embeddings',
-      authors: 'Ada Lovelace, Alan Turing',
-      venue: 'ICML',
-      year: '2024',
-      thumbnail: '/thumb2.svg',
+      title: "Another Sample Paper on Something Interesting",
+      authors: "Co-author A, Zhang Sheng",
+      venue: "Workshop",
+      year: "2024",
       links: {
-        pdf: '#',
-        arxiv: '#',
-      },
-    },
-    {
-      title: 'Efficient Contrastive Pre-training at Scale',
-      authors: 'John Smith, Ada Lovelace, Jane Doe',
-      venue: 'ICLR',
-      year: '2023',
-      links: {
-        pdf: '#',
-        code: '#',
-        bibtex: '#',
+        pdf: "#",
       },
     },
   ],
 
-  // --- Honors & Awards --- (array) ---------------------------------------------
+  // --- Awards --- (array) ------------------------------------------------------
+  // `highlight: true` awards are shown by default; the rest collapse behind a
+  // "+ N more" button that expands them inline. `medal` ("gold" | "silver")
+  // picks the icon color. Order = display order.
   awards: [
     {
-      date: '2025',
-      title: 'Outstanding Paper Award',
-      organization: 'NeurIPS',
+      title:
+        "21st Zhejiang Provincial Collegiate Programming Contest — Gold Medal",
+      date: "2024.04",
+      medal: "gold",
+      highlight: true,
     },
     {
-      date: '2024',
-      title: 'Graduate Research Fellowship',
-      organization: 'National Science Foundation',
+      title: "48th ICPC Asia Regional, Jinan Site — Silver Medal",
+      date: "2023.12",
+      medal: "silver",
+      highlight: true,
     },
     {
-      date: '2021',
-      title: 'Dean’s List — Class Valedictorian',
-      organization: 'Institute of Technology',
+      title: "48th ICPC Asia Regional, Xi'an Site — Silver Medal",
+      date: "2023.11",
+      medal: "silver",
+      highlight: true,
+    },
+    {
+      title: "9th CCPC, Qinhuangdao Site — Silver Medal",
+      date: "2023.10",
+      medal: "silver",
+      highlight: true,
+    },
+    {
+      title: "47th ICPC Asia Regional, Jinan Site — Silver Medal",
+      date: "2022.11",
+      medal: "silver",
+      highlight: false,
+    },
+    {
+      title: "47th ICPC Asia Regional, Xi'an Site — Silver Medal",
+      date: "2022.11",
+      medal: "silver",
+      highlight: false,
     },
   ],
 
   // --- Navigation --- ----------------------------------------------------------
-  // Each `id` MUST match a section rendered in MainContent. Reorder or remove
-  // entries to change the nav (and the sections shown).
+  // Each `id` MUST match a section rendered in MainContent.
   navItems: [
-    { id: 'about', label: 'About' },
-    { id: 'education', label: 'Education' },
-    { id: 'experience', label: 'Experience' },
-    { id: 'publications', label: 'Publications' },
-    { id: 'awards', label: 'Honors & Awards' },
+    { id: "about", label: "About" },
+    { id: "education", label: "Education" },
+    { id: "experience", label: "Experience" },
+    { id: "publications", label: "Publications" },
+    { id: "awards", label: "Awards" },
   ],
-}
+};

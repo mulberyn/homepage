@@ -20,16 +20,15 @@ export default {
         'text-primary': 'var(--color-text-primary)',
         'text-secondary': 'var(--color-text-secondary)',
         'text-muted': 'var(--color-text-muted)',
-        // Soft pastel section tints.
-        'tint-peach': 'var(--tint-peach)',
-        'tint-sky': 'var(--tint-sky)',
-        'tint-mint': 'var(--tint-mint)',
-        'tint-blush': 'var(--tint-blush)',
+        // Slightly stronger, warm section divider.
+        divider: 'var(--divider)',
       },
       fontFamily: {
-        // Inter for headings/UI, Lora for readable serif body.
+        // Inter for headings/UI, Lora for readable serif body, Dancing Script
+        // for the cursive brand logo in the nav.
         sans: ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],
         serif: ['Lora', 'Georgia', 'serif'],
+        script: ['"Dancing Script"', 'cursive'],
       },
       boxShadow: {
         // Soft, warm, low-contrast shadows for the airy card look.

@@ -3,7 +3,6 @@ import Hero from './components/Hero.jsx'
 import MainContent from './components/MainContent.jsx'
 import ArcBackground from './components/ArcBackground.jsx'
 import Seo from './components/Seo.jsx'
-import ScrollProgress from './components/ScrollProgress.jsx'
 import useKeyboardNav from './hooks/useKeyboardNav.js'
 import { useTheme } from './context/ThemeContext.jsx'
 
@@ -29,9 +28,6 @@ export default function App() {
     <div className="relative min-h-screen">
       {/* Side-effect only: sets document title, meta tags, JSON-LD. */}
       <Seo />
-
-      {/* Thin reading-progress bar pinned to the top of the viewport. */}
-      <ScrollProgress />
 
       {/* Decorative flat arcs behind all content. */}
       <ArcBackground />

@@ -9,8 +9,8 @@ import {
 /**
  * ThemeContext
  * -------------------------------------------------------------------------
- * Global theme state for this light-only design:
- *   • theme — "light" (fresh) | "warm" (creamy)
+ * Global theme state — a simple warm Light / Dark toggle:
+ *   • theme — "light" | "dark"
  *
  * The visual change is done purely with CSS custom properties (see
  * src/styles/index.css). This provider keeps the `data-theme` attribute on
@@ -21,7 +21,11 @@ const ThemeContext = createContext(null)
 
 const getInitialTheme = () => {
   try {
-    return localStorage.getItem('theme') === 'warm' ? 'warm' : 'light'
+    const saved = localStorage.getItem('theme')
+    if (saved === 'light' || saved === 'dark') return saved
+    return window.matchMedia('(prefers-color-scheme: dark)').matches
+      ? 'dark'
+      : 'light'
   } catch {
     return 'light'
   }
@@ -43,9 +47,9 @@ export function ThemeProvider({ children }) {
   const value = useMemo(
     () => ({
       theme,
-      isWarm: theme === 'warm',
+      isDark: theme === 'dark',
       toggleTheme: () =>
-        setTheme((t) => (t === 'warm' ? 'light' : 'warm')),
+        setTheme((t) => (t === 'dark' ? 'light' : 'dark')),
       setTheme,
     }),
     [theme]

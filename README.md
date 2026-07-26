@@ -7,7 +7,7 @@ Vite + Tailwind CSS + Framer Motion**, and ready to deploy to **GitHub Pages**
 in minutes.
 
 <p align="center">
-  <em>Sticky top nav · Warm coral + cream palette · Pastel section panels · Flat arc backgrounds · Gentle scroll animations</em>
+  <em>Sticky top nav · Warm Light/Dark · Minimal letter-like sections · School logos · Awards fold · Flat arc backgrounds</em>
 </p>
 
 ---
@@ -16,18 +16,27 @@ in minutes.
 
 - **Sticky top navigation** — no sidebar; a clean sticky nav bar with a sliding
   active-link underline. Collapses into a **hamburger menu** on mobile.
-- **Centered content** — comfortable, readable ~900px column below the nav.
-- **Warm, fresh palette** — creamy off-white backgrounds (`#FFFAF7`) with a
-  **warm coral accent** (`#E88F7A`) and soft pastel section panels
-  (peach / sky / mint / blush). No heavy gradients.
-- **Two light themes** — "Fresh" and a toastier "Creamy Warm", toggled live and
-  remembered across visits. No jarring dark mode.
-- **Flat arc backgrounds** — elegant, low-opacity SVG arcs and circles that scale
-  to any screen (purely decorative, never distracting).
-- **Typography** — **Inter** (clean sans) for headings/UI, **Lora** (readable
-  serif) for body. Light and airy.
-- **Gentle motion** — Framer Motion `whileInView` fade-ups, sliding nav
-  underline, soft card hover lifts. `prefers-reduced-motion` respected.
+- **Letter-like reading experience** — a centered **850px** column, generous
+  line-height (1.8), and **minimal sections separated by subtle hairline
+  dividers** — no heavy cards, borders, or shadows.
+- **Warm, fresh palette** — warm off-white background (`#FDF8F5`) with a
+  **warm coral accent** (`#E88F7A`) and small accent dots used *sparingly*.
+  No heavy gradients.
+- **Warm Light / Dark mode** — a simple toggle between light (`#FDF8F5`) and a
+  cozy warm-dark (`#2D2A26`, muted `#D4A08A` accent) theme. Both stay warm, never
+  cold or harsh; the choice is remembered and follows your OS preference by
+  default.
+- **Personal touches** — a clickable **@handle** under your name linking to your
+  GitHub, **school logo badges** in Education, a **dashed vertical timeline** for
+  Experience & Publications, and an **awards "show more" fold** with **gold/silver
+  medal icons** (highlighted awards shown, the rest expand inline).
+- **Flat arc backgrounds** — elegant, very-low-opacity (4–6%) SVG arcs & circles
+  that scale to any screen (purely decorative, never distracting).
+- **Typography** — **Inter** (clean sans) for moderate headings (h1 ~2rem,
+  h2 ~1.5rem), **Lora** (readable serif) for body, and **Dancing Script** for the
+  cursive brand logo. Light and airy.
+- **Gentle motion** — subtle Framer Motion `whileInView` fade-ups, a sliding nav
+  underline, and quiet color-only hovers. `prefers-reduced-motion` respected.
 - **Zero-code customization** — everything lives in one well-commented file:
   [`src/config/data.js`](src/config/data.js).
 - **SEO, PWA, keyboard nav & more** — see [Improvements](#-improvements) below.
@@ -39,15 +48,15 @@ in minutes.
 The **content structure** follows mem.ac; the **look and feel** deliberately
 diverge toward a warm, cozy "小清新" aesthetic:
 
-| Aspect          | mem.ac approach                                     | This project (Warm & Fresh)                                          |
+| Aspect          | mem.ac approach                                     | This project (Warm & Fresh, minimal)                                 |
 | --------------- | --------------------------------------------------- | -------------------------------------------------------------------- |
-| **Layout**      | Fixed left sidebar + scrollable content             | **Sticky top nav bar** + centered ~900px column (hamburger on mobile) |
+| **Layout**      | Fixed left sidebar + scrollable content             | **Sticky top nav bar** + centered 850px column (hamburger on mobile) |
 | **Palette**     | Soft lavender / purple                              | **Warm coral + cream**; NOT purple                                   |
-| **Sections**    | Flat background                                     | **Alternating pastel panels** (peach / sky / mint / blush)           |
-| **Theme**       | Dark mode + multiple palettes                       | **Two light themes** (Fresh / Creamy Warm) — cozy, no dark mode      |
-| **Typography**  | Serif body + monospace metadata                     | **Inter** headings + **Lora** serif body — light & airy              |
-| **Decoration**  | Ambient glow blobs                                  | **Flat, low-opacity SVG arcs & circles**                             |
-| **Motion**      | Subtle scroll reveals & micro-interactions          | Framer Motion fade-ups, sliding nav underline, hover lifts           |
+| **Sections**    | Flat background                                     | **Minimal sections + hairline dividers**; pastel accent dots, no cards |
+| **Theme**       | Cool dark mode + multiple palettes                  | **Warm Light / Dark** toggle — cozy in both modes                   |
+| **Typography**  | Serif body + monospace metadata                     | **Inter** moderate headings + **Lora** serif body — letter-like      |
+| **Decoration**  | Ambient glow blobs                                  | **Flat, very-low-opacity SVG arcs & circles**                        |
+| **Motion**      | Subtle scroll reveals & micro-interactions          | Subtle Framer Motion fade-ups, sliding nav underline, quiet hovers   |
 | **Content**     | About, education, experience, publications, awards  | Same sections, all driven by `src/config/data.js`                    |
 
 ---
@@ -195,16 +204,18 @@ GitHub Actions workflow injects this value automatically from the repo name.
 ├── src/
 │   ├── components/
 │   │   ├── Navbar.jsx            # Sticky top nav, sliding underline, hamburger
-│   │   ├── Hero.jsx             # Avatar + name + title + socials (identity)
+│   │   ├── Hero.jsx             # Avatar, name, @handle link, socials
 │   │   ├── ArcBackground.jsx     # Flat decorative SVG arcs & circles
 │   │   ├── MainContent.jsx        # All sections container + bio highlighter
-│   │   ├── Section.jsx            # Reusable pastel-panel wrapper w/ reveal
-│   │   ├── ThemeToggle.jsx        # Fresh / Creamy Warm toggle
-│   │   ├── TimelineItem.jsx       # Education & Experience rows
-│   │   ├── PublicationCard.jsx    # Publication cards
-│   │   ├── AwardItem.jsx          # Awards list rows
-│   │   ├── Seo.jsx               # Meta tags + Open Graph + JSON-LD (SEO)
-│   │   └── ScrollProgress.jsx     # Reading-progress bar
+│   │   ├── Section.jsx            # Minimal section wrapper (divider + reveal)
+│   │   ├── ThemeToggle.jsx        # Warm Light / Dark toggle
+│   │   ├── TimelineList.jsx       # Dashed vertical timeline (connector line)
+│   │   ├── TimelineItem.jsx       # Experience entry (node on the line)
+│   │   ├── PublicationItem.jsx    # Publication entry (node on the line)
+│   │   ├── EducationItem.jsx      # Education rows with school logo badges
+│   │   ├── AwardItem.jsx          # A single award row (gold/silver medal icon)
+│   │   ├── AwardsList.jsx         # Awards + inline "show more" fold
+│   │   └── Seo.jsx               # Meta tags + Open Graph + JSON-LD (SEO)
 │   ├── hooks/
 │   │   └── useKeyboardNav.js      # j/k, arrows, 1–9, g/G, t shortcuts
 │   ├── config/
@@ -230,8 +241,10 @@ GitHub Actions workflow injects this value automatically from the repo name.
 | Change any text/content       | Edit `src/config/data.js`                                            |
 | Reorder or hide a section     | Reorder / remove entries in `navItems` (in `data.js`)               |
 | Change my photo               | Replace `public/avatar.svg` and update `avatar` in `data.js`        |
-| Tweak the coral accent / tints | Edit the CSS variables in `src/styles/index.css` (`--color-primary`, `--tint-*`) |
-| Change the section panel colors | Reorder the `TINTS` array in `src/components/MainContent.jsx`       |
+| Change the `@handle` link      | Set `githubHandle` / `githubUrl` in `data.js`                       |
+| Swap a school logo             | Drop a logo in `/public` and set `logo` on the education entry      |
+| Highlight / hide an award      | Set `highlight: true/false` on the award in `data.js` (false = folded) |
+| Tweak the coral accent colors  | Edit `--color-primary` (light) and the `[data-theme='dark']` block in `src/styles/index.css` |
 | Adjust the background arcs     | Edit `src/components/ArcBackground.jsx`                              |
 | Add a new publication link    | Add a key to a publication's `links` (e.g. `slides`, `video`)       |
 
@@ -269,11 +282,9 @@ implemented. See [`CHANGELOG.md`](CHANGELOG.md) for the full detail.
 3. **Keyboard navigation** — `j`/`k` & arrows move between sections, `1`–`9`
    jump directly, `g`/`G` go to first/last, `t` toggles theme.
    → [`src/hooks/useKeyboardNav.js`](src/hooks/useKeyboardNav.js)
-4. **Accessibility** — "skip to content" link, palette-aware `:focus-visible`
+4. **Accessibility** — "skip to content" link, theme-aware `:focus-visible`
    outlines, and a focusable main landmark.
-5. **Reading-progress bar + print stylesheet** — a spring-based scroll indicator
-   ([`ScrollProgress.jsx`](src/components/ScrollProgress.jsx)) and a clean,
-   single-column, ink-friendly CV printout.
+5. **Print stylesheet** — a clean, single-column, ink-friendly CV printout.
 
 ### 💡 Proposed for future iterations
 

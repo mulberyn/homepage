@@ -33,7 +33,7 @@ export default defineConfig(({ mode }) => {
           short_name: 'Homepage',
           description: 'Personal academic homepage.',
           theme_color: '#e88f7a',
-          background_color: '#fffaf7',
+          background_color: '#fdf8f5',
           display: 'standalone',
           // start_url / scope respect the deploy base path automatically.
           start_url: base,

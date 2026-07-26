@@ -4,6 +4,170 @@ All notable changes to this project are documented here. The format is based on
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and this project
 adheres to [Semantic Versioning](https://semver.org/).
 
+## [2.6.0] — Centered dividers, education logos & typography pass
+
+### Changed
+
+- **Section dividers** — no longer span the full content width. They're now a
+  centered rule at **~86% width** (inset from the text edges) with **more space
+  above than below** (`mt-10` / `mb-8`), so the first divider below About gets
+  ~2.5rem of breathing room.
+- **Education logos** — each entry's school logo now renders as a framed ~48px
+  thumbnail (`object-contain`, bordered) so any real logo (square, transparent
+  PNG, wordmark) sits neatly and stays aligned. Swap the placeholder SVGs for
+  your own by dropping files in `/public/images/` and updating the `logo` paths
+  in `data.js`.
+- **Typography pass** — headings get a subtle `-0.01em` letter-spacing and a
+  crisper `1.25` line-height; body keeps 17px / 1.8 with kerning + ligatures and
+  `optimizeLegibility` for effortless long-form reading. Removed the heavier
+  `tracking-tight` on the hero name for a more harmonious scale.
+
+---
+
+## [2.5.0] — Cursive brand, marker highlight & divider polish
+
+### Changed
+
+- **Cursive brand logo** — replaced the navbar's monogram + name with an
+  animated **"mulberyn"** script logo (Google **Dancing Script** font) that fades
+  in and slides from the left on load. (The Hero still carries the full name and
+  avatar as the page's identity.)
+- **Marker-style highlight** — the About highlight is now an inset box-shadow
+  band (`inset 0 -0.34em 0 var(--highlight-color)`) that hugs the text baseline
+  like a gentle marker (mem.ac style), instead of a detached underline sitting
+  below the text.
+- **Section dividers** — thicker (2px) and more visible via a dedicated warm
+  `--divider` color (light `#e3d3c6`, dark `#4d4439`), with balanced ~2rem
+  spacing above and below.
+- **Polish** — subtle hover micro-interactions (gentle scale + color on social
+  icons); removed now-unused tint tokens and the monogram helper.
+
+---
+
+## [2.4.0] — Polish fixes: nav slider, timeline alignment, highlight & arcs
+
+### Fixed
+
+- **Nav slider glitch** — replaced the Framer `layoutId` underline (which
+  stuttered across distant items) with **ONE persistent underline** whose
+  left/width are measured from the active link via refs
+  (`getBoundingClientRect` relative to the `<ul>`), animated with a spring. It
+  now slides smoothly and directly across any distance.
+- **Scroll-spy for the last section** — rewrote the active-section detection to
+  use viewport-relative `getBoundingClientRect().top` (not `offsetTop`, which is
+  relative to the positioned ancestor and mis-computed the position) plus a
+  bottom-of-page guard, so **Awards** (the short last section) now highlights
+  correctly.
+- **Timeline node alignment** — the Experience/Publications node circle is now
+  vertically centered on the first text line (date / venue) while staying
+  anchored to the dashed line's x-position. Also fixed a regression where a
+  wrapper made nodes overlap the text.
+- **About highlight spacing** — increased the gap between the text and the
+  highlight underline bar (~6-8px of breathing room) so the line never touches
+  the letters.
+
+### Changed
+
+- **Background arcs are theme-aware** — a new `--arc-opacity` makes the flat
+  shapes clearly noticeable in **light** mode (12%) while staying subtle in
+  **dark** mode (5%).
+
+---
+
+## [2.3.0] — Timeline, gold/silver medals & highlight polish
+
+### Added
+
+- **Dashed vertical timeline** for Experience & Publications
+  (`TimelineList.jsx`) — a single thin, elegant dashed connector line down the
+  left with a small circle node per entry. Publications moved from flat cards to
+  timeline entries (`PublicationItem.jsx`).
+- **Gold / silver medal icons** — awards now carry a `medal` field
+  (`"gold" | "silver"`); the medal icon is colored accordingly (gold `#d9a520`,
+  silver `#9ca3af`) so a Gold medal never looks like a Silver.
+
+### Changed
+
+- **About highlight spacing** — the highlighter is now drawn as a thin bar
+  pinned to the bottom with extra `padding-bottom`, so the underline sits clearly
+  **below** the text and never touches the letters.
+- Added a second sample Experience and Publication entry so the timeline shows a
+  connected line out of the box.
+
+### Removed
+
+- `PublicationCard.jsx` (replaced by the timeline `PublicationItem.jsx`).
+
+---
+
+## [2.2.0] — Warm Light/Dark, personal content & awards fold
+
+Adds a warm dark mode, tightens the layout, and wires in personalized content
+(GitHub handle, school logos, competitive-programming awards with a fold).
+
+### Added
+
+- **Warm Light / Dark mode** — replaced the light-only theme set with a simple
+  **Light ↔ Dark** toggle (sun/moon). Both are warm: light `#FDF8F5` /
+  coral `#E88F7A`; dark `#2D2A26` / muted `#D4A08A` on cream text. Follows the OS
+  preference by default and is remembered.
+- **Clickable `@handle`** — the GitHub handle renders under the name and links to
+  your profile in a new tab (`githubHandle` / `githubUrl` in `data.js`).
+- **School logo badges** — Education entries now show a small school logo
+  (`EducationItem.jsx`); ships with ZJUT + PKU placeholder badges in `/public`.
+- **Awards "show more" fold** — `AwardsList.jsx` shows `highlight: true` awards by
+  default and expands the rest **inline** behind a "+ N more" button
+  (no popup/modal). Pre-filled with real ICPC / CCPC / provincial results.
+
+### Changed
+
+- **Compact spacing** — reduced section/heading/paragraph margins for a tighter,
+  letter-like flow.
+- **Config** — restructured `data.js`: `githubHandle`/`githubUrl`; `education`
+  entries use `{ school, logo, major, degree, dates }`; `awards` is a flat array
+  of `{ title, date, highlight }`; nav label "Honors & Awards" → "Awards".
+- **Background arcs** — now use warm-toned colors that adapt to the active theme.
+
+### Removed
+
+- **Scroll progress bar** (`ScrollProgress.jsx`) — removed entirely per design.
+- The previous "Fresh / Creamy Warm" light-only theme variants.
+
+---
+
+## [2.1.0] — Minimal, letter-like refinement
+
+Refines the 2.0 warm redesign toward a cleaner, more minimal, blog/letter-like
+reading experience (inspired by innei.in). Same layout, palette, config, and
+deployment — just calmer, airier styling.
+
+### Changed
+
+- **Sections** — removed the rounded pastel **card panels**; sections are now
+  transparent and separated by **subtle hairline dividers**, in a natural
+  top-to-bottom reading flow. Pastels are reduced to small **accent dots** next
+  to each heading (used sparingly).
+- **Reading comfort** — body set to **17px / line-height 1.8**; content column
+  narrowed to **max-width 850px** with generous vertical rhythm.
+- **Headings** — moderated sizes (h1 ~2rem, h2 ~1.5rem, h3 ~1.2rem); smaller,
+  calmer Hero avatar.
+- **Publications** — flattened from cards into clean **rows with dividers**
+  (no borders/shadows); venue shown as a small uppercase label; link chips hover
+  to a subtle outline (no fill).
+- **Awards** — flattened into simple divided rows with a small icon and a quiet
+  year on the right (no card, no shadow).
+- **Hover states** — removed lift/heavy-shadow hovers in favor of quiet
+  color-only changes.
+- **Background arcs** — opacity lowered to ~4–6% for a more minimal feel.
+
+### Retained
+
+- Sticky top nav (sliding underline, hamburger), two light themes, SEO/JSON-LD,
+  PWA, keyboard navigation, accessibility, reading-progress bar, print styles,
+  and the config-driven content model.
+
+---
+
 ## [2.0.0] — Warm & Fresh redesign ("小清新")
 
 A full visual redesign toward a light, cozy, warm-pastel aesthetic. The content
