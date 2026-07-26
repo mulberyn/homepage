@@ -1,4 +1,3 @@
-import { Fragment } from 'react'
 import { User, GraduationCap, Briefcase, BookOpen, Award, FolderGit } from 'lucide-react'
 import { userData } from '../config/data'
 import Section from './Section'
@@ -8,31 +7,7 @@ import EducationItem from './EducationItem'
 import PublicationItem from './PublicationItem'
 import AwardsList from './AwardsList'
 import ProjectItem from './ProjectItem'
-
-/**
- * Render a bio string, turning **double-asterisk** spans into highlighted text
- * and preserving paragraph breaks (blank lines). Dependency-free.
- */
-function RichBio({ text }: { text: string }) {
-  return (
-    <>
-      {text.split('\n\n').map((para, pi) => (
-    <p key={pi} className="text-text-secondary [&:not(:first-child)]:mt-3">
-      {para.split(/(\*\*[^*]+\*\*)/g).map((chunk, ci) => {
-        const match = chunk.match(/^\*\*([^*]+)\*\*$/)
-        return match ? (
-          <span key={ci} className="highlight">
-            {match[1]}
-          </span>
-        ) : (
-          <Fragment key={ci}>{chunk}</Fragment>
-        )
-          })}
-        </p>
-      ))}
-    </>
-  )
-}
+import AboutMarkdown, { hasAboutContent } from './AboutMarkdown'
 
 /**
  * MainContent
@@ -51,10 +26,10 @@ export default function MainContent() {
   return (
     <main className="mx-auto w-full max-w-[850px] pb-20 pt-10 side:pt-12">
       <div className="space-y-10">
-        {/* ---------------- About ---------------- */}
-        {enabled.has('about') && userData.about && (
+        {/* ---------------- About (rendered from src/config/about.md) ---------------- */}
+        {enabled.has('about') && hasAboutContent && (
           <Section id="about" icon={User} title="About">
-            <RichBio text={userData.about} />
+            <AboutMarkdown />
           </Section>
         )}
 

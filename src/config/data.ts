@@ -94,7 +94,6 @@ export interface UserData {
   githubUrl?: string;
   socials?: Socials;
   seo?: SeoConfig;
-  about?: string;
   education?: EducationEntry[];
   experience?: ExperienceEntry[];
   publications?: Publication[];
@@ -153,10 +152,8 @@ export const userData: UserData = {
   },
 
   // --- About ------------------------------------------------------------------
-  // A short bio. Wrap words in **double asterisks** to highlight them.
-  about:
-    "I am a Computer Science student and competitive programmer. I earned my bachelor's degree at Zhejiang University of Technology (Experimental Class) and am beginning my master's at **Peking University.**\n\n" +
-    "I enjoy algorithms, problem solving, and building clean solutions. I am deeply interested in AGI and LLMs, and I am continuously exploring and learning about computer science and AI.",
+  // The About bio now lives in src/config/about.md (standard Markdown —
+  // **bold** renders as the coral highlighter). Edit that file instead.
 
   // --- Education --- (array) ---------------------------------------------------
   // Each entry shows a small school logo (put images in /public).
