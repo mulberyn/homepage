@@ -75,8 +75,9 @@
 @layer base {
   html {
     scroll-behavior: smooth;
-    /* Offset anchor targets so headings clear the sticky top nav bar. */
-    scroll-padding-top: 96px;
+    /* Offset anchor targets so headings clear the sticky top nav (64px)
+       with a little breathing room. */
+    scroll-padding-top: 88px;
   }
 
   body {
@@ -120,6 +121,15 @@
      fully visible (`both` keeps the end state). Under prefers-reduced-motion
      the global override collapses the duration, so the text simply appears. */
   .brand-write {
+    /* The mask clips paint to the element's border box, and Dancing Script's
+       descenders (the tail of the "y") extend BELOW a tight line box — which
+       is exactly how the "y" was getting cut off. A roomy line-height plus a
+       touch of bottom padding pulls the descender inside the box so the full
+       glyph survives the mask. */
+    display: inline-block;
+    line-height: 1.35;
+    padding-bottom: 0.1em;
+    overflow: visible;
     /* Stop math (mask is 3× the element, position animates 100% → 0%, so the
        element's window slides from the right third to the left third of the
        gradient): transparent must start by 66.7% so the text begins fully
@@ -190,6 +200,17 @@
     animation-iteration-count: 1 !important;
     transition-duration: 0.001ms !important;
     scroll-behavior: auto !important;
+  }
+}
+
+/* Hide the scrollbar on the TopNav link row (it scrolls horizontally on
+   narrow screens) while keeping it scrollable. */
+@layer utilities {
+  .scrollbar-none {
+    scrollbar-width: none;
+  }
+  .scrollbar-none::-webkit-scrollbar {
+    display: none;
   }
 }
 

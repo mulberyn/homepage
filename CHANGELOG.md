@@ -4,6 +4,90 @@ All notable changes to this project are documented here. The format is based on
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and this project
 adheres to [Semantic Versioning](https://semver.org/).
 
+## [4.2.0] — Nav spacing, contact rows, full-width underline
+
+### Changed
+
+- **Brand ↔ links gap** — the cursive brand now keeps a clear breathing gap
+  (2rem on desktop) from the section links; the group stays page-centered.
+- **Sidebar contact rows** — two icon + text rows below the @handle/title:
+  a MapPin row (`location`, "Hangzhou Zhejiang") and a Mail row with the new
+  address `zhangsheng26@stu.pku.edu.cn` (mailto link). Both come from new
+  optional `location` / updated `email` fields in `data.ts`.
+- **Active-link underline** — the tiny dot under the active nav link is now
+  a 2px underline spanning exactly the label text (insets match the link
+  padding). Still per-item with an in-place fade — no sliding, no stutter.
+
+---
+
+## [4.1.0] — Centered nav with brand, sidebar trim
+
+### Changed
+
+- **TopNav is now truly centered** — a 3-column grid (1fr | auto | 1fr) keeps
+  the nav content centered in the page width, with the theme toggle in the
+  right column. The cursive **"mulberyn" brand** (with its handwriting
+  reveal) moved from the sidebar into the bar's left slot, section links
+  right after it.
+- **Sidebar trimmed** — the email text is gone from `ProfileSidebar` (the
+  mail icon among the social links remains), and the brand no longer renders
+  there now that it lives in the nav.
+
+---
+
+## [4.0.0] — Top nav + identity sidebar layout
+
+### Changed
+
+- **Navigation moved back to a sticky top bar** (`TopNav`) shown at every
+  screen size: the five section links plus the theme toggle. The active link
+  is marked by the accent text color and a small dot under the label — each
+  link owns its own dot, so nothing animates across items and nothing can
+  stutter. On narrow screens the link row scrolls horizontally (scrollbar
+  hidden) instead of hiding behind a hamburger.
+- **The sidebar is now navigation-free** (`ProfileSidebar`): cursive brand,
+  circular avatar, name / @handle / title / email, and social links only.
+- **Centered page container** — the sidebar and the 850px content column
+  share one centered `max-w-[1240px]` padded container, so the sidebar keeps
+  a comfortable inset from the left screen edge instead of hugging it. The
+  sidebar column (270px) uses `position: sticky` below the nav, staying put
+  while the content scrolls.
+- **Stacked layout under 960px** (custom `side` breakpoint) — the sidebar
+  folds into the top of the page flow as a compact horizontal identity row
+  (avatar beside name/title/email, socials underneath), with the nav still
+  on top and the content following. `MobileHeader` is gone.
+- **Avatar file** — the photo now ships as `/avatar.jpeg` (the old
+  `/avatar.jpg` placeholder was replaced).
+
+---
+
+## [3.0.0] — Fixed sidebar layout
+
+### Changed
+
+- **Two-column layout** — the sticky top nav bar + centered Hero are replaced by
+  a **fixed 280px left sidebar** (100vh) holding the cursive "mulberyn" brand,
+  a 120px circular avatar, name / title / email, social links, the section
+  navigation, and the theme toggle. Content scrolls on the right, centered at
+  max 850px. Below `lg` the sidebar collapses into a compact sticky top bar
+  with a hamburger menu (`MobileHeader`).
+- **Nav highlight** — the sliding underline indicator is gone. The active link
+  now shows a small coral vertical bar + accent text color; each link owns its
+  own indicator, so nothing animates across items and nothing can jitter.
+  Scroll-spy + smooth scrolling live in a shared `useScrollSpy` hook.
+- **Anchor offsets** — `scroll-padding-top` on `<html>` is now responsive:
+  28px on desktop (no top bar), 88px under the mobile header. `Section` no
+  longer needs its own `scroll-mt`.
+
+### Fixed
+
+- **Brand "y" descender clipping** — the handwriting mask clips paint to the
+  element's border box, and Dancing Script's descenders extended below the
+  tight line box. `.brand-write` now reserves room (`line-height: 1.35` +
+  bottom padding), so the full glyph survives the mask.
+
+---
+
 ## [2.6.0] — Centered dividers, education logos & typography pass
 
 ### Changed

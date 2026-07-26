@@ -5,6 +5,12 @@ export default {
   content: ['./index.html', './src/**/*.{js,jsx,ts,tsx}'],
   theme: {
     extend: {
+      // Custom breakpoint: at ≥960px the page switches from the stacked
+      // mobile flow (identity block on top) to the two-column layout
+      // (sticky identity sidebar + scrolling content).
+      screens: {
+        side: '960px',
+      },
       // All colors map to CSS custom properties defined in src/styles/index.css,
       // so the light / creamy-warm switch happens instantly by swapping vars.
       // (We keep the `primary` name for the accent so leaf components need no

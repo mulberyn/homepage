@@ -36,18 +36,19 @@ function RichBio({ text }: { text: string }) {
 /**
  * MainContent
  * -------------------------------------------------------------------------
- * The centered reading column (max-width 850px) below the sticky nav bar.
- * Sections are flat; each opens with an icon + title and a two-tone rule that
- * doubles as the separator, so there are no full-width dividers between
- * blocks — just comfortable vertical spacing (2.5rem). Sections only render
- * if their nav item exists AND there is data, so removing a navItem or
- * emptying an array hides the section.
+ * The scrolling reading column beside the sticky ProfileSidebar (below it on
+ * mobile), max-width 850px. Horizontal padding comes from the shared page
+ * container in App. Sections are flat; each opens with an icon + title and
+ * a two-tone rule that doubles as the separator, so there are no full-width
+ * dividers between blocks — just comfortable vertical spacing (2.5rem).
+ * Sections only render if their nav item exists AND there is data, so
+ * removing a navItem or emptying an array hides the section.
  */
 export default function MainContent() {
   const enabled = new Set(userData.navItems.map((n) => n.id))
 
   return (
-    <main className="mx-auto w-full max-w-[850px] px-6 pb-20 sm:px-8">
+    <main className="mx-auto w-full max-w-[850px] pb-20 pt-10 side:pt-12">
       <div className="space-y-10">
         {/* ---------------- About ---------------- */}
         {enabled.has('about') && userData.about && (

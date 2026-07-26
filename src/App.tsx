@@ -1,5 +1,5 @@
-import Navbar from './components/Navbar'
-import Hero from './components/Hero'
+import TopNav from './components/TopNav'
+import ProfileSidebar from './components/ProfileSidebar'
 import MainContent from './components/MainContent'
 import ArcBackground from './components/ArcBackground'
 import Seo from './components/Seo'
@@ -9,10 +9,13 @@ import { useTheme } from './context/ThemeContext'
 /**
  * App
  * -------------------------------------------------------------------------
- * Warm, fresh "小清新" layout:
+ * Warm, fresh layout:
  *   • flat SVG arc background (decorative, behind everything)
- *   • sticky top nav bar (no sidebar)
- *   • centered content: Hero identity header + MainContent sections
+ *   • sticky TopNav with the section links (all screen sizes)
+ *   • a centered page container (max 1240px, padded — nothing hugs the
+ *     screen edge) holding the navigation-free identity sidebar and the
+ *     scrolling content column side by side (≥960px); below 960px the
+ *     sidebar folds into the top of the flow and everything stacks.
  * The theme provider lives one level up in main.tsx.
  */
 export default function App() {
@@ -21,9 +24,6 @@ export default function App() {
   // Power-user keyboard navigation (j/k, arrows, 1–9, g/G, t). See the hook.
   useKeyboardNav({ toggleTheme })
 
-  // NOTE: no `overflow-x-hidden` on the root — it creates a scroll container
-  // that breaks the Navbar's `position: sticky`. The decorative arcs are
-  // already clipped by ArcBackground's own fixed `overflow-hidden` wrapper.
   return (
     <div className="relative min-h-screen">
       {/* Side-effect only: sets document title, meta tags, JSON-LD. */}
@@ -40,12 +40,16 @@ export default function App() {
         Skip to content
       </a>
 
-      <Navbar />
+      <TopNav />
 
       {/* #main is the skip-link target (tabIndex -1 so focus lands here). */}
       <div id="main" tabIndex={-1} className="outline-none">
-        <Hero />
-        <MainContent />
+        {/* Centered page container: sidebar + content share it, so the
+            sidebar keeps a comfortable inset from the left screen edge. */}
+        <div className="mx-auto flex w-full max-w-[1240px] flex-col px-5 sm:px-8 side:flex-row side:gap-10">
+          <ProfileSidebar />
+          <MainContent />
+        </div>
       </div>
     </div>
   )

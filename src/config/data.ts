@@ -13,93 +13,99 @@
 // =============================================================================
 
 export interface Socials {
-  github?: string
-  twitter?: string
-  linkedin?: string
-  scholar?: string
-  email?: string
+  github?: string;
+  twitter?: string;
+  linkedin?: string;
+  scholar?: string;
+  email?: string;
 }
 
 export interface SeoConfig {
-  siteUrl?: string
-  description?: string
-  ogImage?: string
-  keywords?: string[]
-  lang?: string
-  twitterHandle?: string
+  siteUrl?: string;
+  description?: string;
+  ogImage?: string;
+  keywords?: string[];
+  lang?: string;
+  twitterHandle?: string;
 }
 
 export interface EducationEntry {
-  school: string
-  logo?: string
-  major?: string
-  degree?: string
-  dates?: string
+  school: string;
+  logo?: string;
+  major?: string;
+  degree?: string;
+  dates?: string;
 }
 
 export interface ExperienceEntry {
-  date?: string
-  title: string
-  company?: string
-  description?: string
+  date?: string;
+  title: string;
+  company?: string;
+  description?: string;
 }
 
 /** Known link keys get a dedicated icon; any other key renders a generic one. */
 export type PublicationLinks = Partial<
-  Record<'pdf' | 'code' | 'project' | 'arxiv' | 'bibtex', string>
+  Record<"pdf" | "code" | "project" | "arxiv" | "bibtex", string>
 > &
-  Record<string, string | undefined>
+  Record<string, string | undefined>;
 
 export interface Publication {
-  title: string
-  authors?: string
-  venue?: string
-  year?: string
-  links?: PublicationLinks
+  title: string;
+  authors?: string;
+  venue?: string;
+  year?: string;
+  links?: PublicationLinks;
 }
 
-export type Medal = 'gold' | 'silver'
+export type Medal = "gold" | "silver";
 
 export interface Award {
-  title: string
-  date?: string
-  medal?: Medal
-  highlight?: boolean
+  title: string;
+  date?: string;
+  medal?: Medal;
+  highlight?: boolean;
 }
 
 export interface NavItem {
-  id: string
-  label: string
+  id: string;
+  label: string;
 }
 
 export interface UserData {
-  name: string
-  title: string
-  email?: string
+  name: string;
+  title: string;
+  email?: string;
+  /** Shown in the sidebar as a MapPin row (e.g. "Hangzhou Zhejiang"). */
+  location?: string;
   /** Optional; used by the SEO JSON-LD as the affiliated organization. */
-  affiliation?: string
-  avatar?: string
-  githubHandle?: string
-  githubUrl?: string
-  socials?: Socials
-  seo?: SeoConfig
-  about?: string
-  education?: EducationEntry[]
-  experience?: ExperienceEntry[]
-  publications?: Publication[]
-  awards?: Award[]
-  navItems: NavItem[]
+  affiliation?: string;
+  avatar?: string;
+  githubHandle?: string;
+  githubUrl?: string;
+  socials?: Socials;
+  seo?: SeoConfig;
+  about?: string;
+  education?: EducationEntry[];
+  experience?: ExperienceEntry[];
+  publications?: Publication[];
+  awards?: Award[];
+  navItems: NavItem[];
 }
 
 export const userData: UserData = {
   // --- Personal ---------------------------------------------------------------
   name: "Zhang Sheng",
   title: "CS Student / Competitive Programmer",
-  email: "mulberyn@gmail.com",
+  // Contact rows in the sidebar (icon + text). The email here is the one
+  // displayed next to the Mail icon; the socials.email below only powers the
+  // round mail icon button.
+  email: "zhangsheng26@stu.pku.edu.cn",
+  location: "Hangzhou Zhejiang",
 
   // Avatar image. A placeholder ships in /public/avatar.svg — replace it with
   // your own photo (e.g. drop /public/avatar.jpg and set avatar: '/avatar.jpg').
-  avatar: "/avatar.svg",
+  avatar: "/avatar.jpeg",
 
   // GitHub handle shown under your name (rendered as "@handle", links to the URL
   // in a new tab).

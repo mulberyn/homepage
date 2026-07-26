@@ -26,9 +26,10 @@ interface SectionProps {
  */
 export default function Section({ id, icon: Icon, title, children }: SectionProps) {
   return (
+    // Anchor offset comes from `scroll-padding-top` on <html> (responsive:
+    // small on desktop, taller under the mobile header) — no scroll-mt here.
     <motion.section
       id={id}
-      className="scroll-mt-20"
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.15 }}
