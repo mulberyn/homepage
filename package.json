@@ -1,9 +1,9 @@
 {
-  "name": "academic-homepage",
+  "name": "leaf",
   "private": true,
   "version": "4.2.1",
   "type": "module",
-  "description": "A warm, fresh (小清新) personal academic homepage built with React + Vite + Tailwind + Framer Motion.",
+  "description": "Leaf — a warm, airy personal academic homepage built with React + Vite + Tailwind + Framer Motion.",
   "homepage": "https://<username>.github.io/<repository-name>/",
   "scripts": {
     "dev": "vite",

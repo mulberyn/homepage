@@ -26,9 +26,14 @@ import ThemeToggle from './ThemeToggle'
  * that spans exactly the label. Each link owns its own underline — nothing
  * slides between items, so there is no cross-item animation to stutter.
  *
+ * Layout: the brand is pinned left and the link group fills the remaining
+ * space (flex-1). On narrow screens (640–960px) the links CENTER in that
+ * space so they don't crowd either edge; at ≥960px (`side:`) they align
+ * right next to the theme toggle, matching Pure's desktop look.
+ *
  * Below 640px the links collapse behind a hamburger; the menu drops down as
  * a warm card and expands with a `grid-template-rows: 0fr → 1fr` transition
- * (the same technique Pure uses), with right-aligned links.
+ * (the same technique Pure uses), with centered links.
  */
 export default function TopNav() {
   const { active, scrollTo } = useScrollSpy()
@@ -77,44 +82,46 @@ export default function TopNav() {
               e.preventDefault()
               window.scrollTo({ top: 0, behavior: 'smooth' })
             }}
-            className="brand-write shrink-0 px-2 font-script text-[1.5rem] font-bold text-primary transition-colors duration-200 hover:text-primary-soft"
+            className="brand-write shrink-0 px-2 font-script text-[1.35rem] font-bold text-primary transition-colors duration-200 hover:text-primary-soft sm:text-[1.5rem]"
           >
             {userData.githubHandle || 'mulberyn'}
           </a>
 
-          {/* Links (≥640px) + theme toggle + hamburger (<640px). */}
-          <div className="flex items-center gap-2">
-            <ul className="hidden items-center sm:flex">
-              {userData.navItems.map((item) => {
-                const isActive = active === item.id
-                return (
-                  <li key={item.id} className="shrink-0">
-                    <a
-                      href={`#${item.id}`}
-                      onClick={(e) => handleNavClick(e, item.id)}
-                      aria-current={isActive ? 'true' : undefined}
-                      className={`relative block rounded-full px-3 py-2 font-sans text-sm transition-colors duration-200 ${
-                        isActive
-                          ? 'font-semibold text-primary'
-                          : 'font-medium text-text-secondary hover:text-text-primary'
+          {/* Link group (≥640px): fills the space between brand and toggle,
+              centered on narrow screens, right-aligned on ≥960px. */}
+          <ul className="hidden min-w-0 flex-1 items-center justify-center sm:flex side:justify-end">
+            {userData.navItems.map((item) => {
+              const isActive = active === item.id
+              return (
+                <li key={item.id} className="shrink-0">
+                  <a
+                    href={`#${item.id}`}
+                    onClick={(e) => handleNavClick(e, item.id)}
+                    aria-current={isActive ? 'true' : undefined}
+                    className={`relative block rounded-full px-3 py-2 font-sans text-sm transition-colors duration-200 ${
+                      isActive
+                        ? 'font-semibold text-primary'
+                        : 'font-medium text-text-secondary hover:text-text-primary'
+                    }`}
+                  >
+                    {item.label}
+                    {/* Per-item active underline: spans exactly the label
+                        text (insets match the link's padding) and fades in
+                        place — no sliding between items, no stutter. */}
+                    <span
+                      aria-hidden
+                      className={`absolute inset-x-3 bottom-0 h-[2px] rounded-full bg-primary transition-opacity duration-200 ${
+                        isActive ? 'opacity-100' : 'opacity-0'
                       }`}
-                    >
-                      {item.label}
-                      {/* Per-item active underline: spans exactly the label
-                          text (insets match the link's padding) and fades in
-                          place — no sliding between items, no stutter. */}
-                      <span
-                        aria-hidden
-                        className={`absolute inset-x-3 bottom-0 h-[2px] rounded-full bg-primary transition-opacity duration-200 ${
-                          isActive ? 'opacity-100' : 'opacity-0'
-                        }`}
-                      />
-                    </a>
-                  </li>
-                )
-              })}
-            </ul>
+                    />
+                  </a>
+                </li>
+              )
+            })}
+          </ul>
 
+          {/* Theme toggle + hamburger (<640px), pinned right. */}
+          <div className="flex shrink-0 items-center gap-2">
             <ThemeToggle />
 
             {/* Mobile menu toggle, styled to match ThemeToggle. */}
@@ -162,7 +169,7 @@ export default function TopNav() {
                         onClick={(e) => handleNavClick(e, item.id)}
                         aria-current={isActive ? 'true' : undefined}
                         tabIndex={expanded ? undefined : -1}
-                        className={`block w-full py-2 text-right font-sans text-sm transition-colors duration-200 ${
+                        className={`block w-full py-2 text-center font-sans text-sm transition-colors duration-200 ${
                           isActive
                             ? 'font-semibold text-primary'
                             : 'font-medium text-text-secondary hover:text-text-primary'
