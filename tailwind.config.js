@@ -22,6 +22,9 @@ export default {
         'bg-alt': 'var(--color-bg-alt)',
         'bg-card': 'var(--color-bg-card)',
         surface: 'var(--color-surface)',
+        // Translucent surfaces (carry their own alpha — see index.css).
+        'bg-veil': 'var(--color-bg-veil)',
+        'card-veil': 'var(--color-card-veil)',
         border: 'var(--color-border)',
         'text-primary': 'var(--color-text-primary)',
         'text-secondary': 'var(--color-text-secondary)',

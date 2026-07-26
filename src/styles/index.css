@@ -40,6 +40,12 @@
 
   /* Soft coral highlighter color for **bolded** bio words (drawn as a bar). */
   --highlight-color: rgba(232, 143, 122, 0.32);
+
+  /* Translucent surfaces for the floating nav pill / dropdown (they sit over
+     scrolling content with backdrop-blur). Tailwind's `/opacity` modifier
+     can't derive alpha from a var() color, so these carry their own alpha. */
+  --color-bg-veil: rgba(253, 248, 245, 0.85); /* --color-bg @ 85% */
+  --color-card-veil: rgba(255, 255, 255, 0.95); /* --color-bg-card @ 95% */
 }
 
 /* ---- Dark — warm dark gray, muted warm accent ---- */
@@ -66,6 +72,9 @@
   --arc-opacity: 0.05; /* keep decorations subtle in dark mode */
 
   --highlight-color: rgba(212, 160, 138, 0.34);
+
+  --color-bg-veil: rgba(45, 42, 38, 0.85); /* --color-bg @ 85% */
+  --color-card-veil: rgba(53, 48, 42, 0.95); /* --color-bg-card @ 95% */
 }
 
 /* ==========================================================================
@@ -75,8 +84,8 @@
 @layer base {
   html {
     scroll-behavior: smooth;
-    /* Offset anchor targets so headings clear the sticky top nav (64px)
-       with a little breathing room. */
+    /* Offset anchor targets so headings clear the floating top nav
+       (12px offset + 56px bar) with a little breathing room. */
     scroll-padding-top: 88px;
   }
 
@@ -200,17 +209,6 @@
     animation-iteration-count: 1 !important;
     transition-duration: 0.001ms !important;
     scroll-behavior: auto !important;
-  }
-}
-
-/* Hide the scrollbar on the TopNav link row (it scrolls horizontally on
-   narrow screens) while keeping it scrollable. */
-@layer utilities {
-  .scrollbar-none {
-    scrollbar-width: none;
-  }
-  .scrollbar-none::-webkit-scrollbar {
-    display: none;
   }
 }
 
