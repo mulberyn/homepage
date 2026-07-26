@@ -67,6 +67,15 @@ export interface Award {
   highlight?: boolean;
 }
 
+export interface ProjectEntry {
+  title: string;
+  description?: string;
+  /** Repo or live-site link; leave empty ("") to render a non-clickable item. */
+  url?: string;
+  /** Optional tech tags rendered as small pills. */
+  tech?: string[];
+}
+
 export interface NavItem {
   id: string;
   label: string;
@@ -90,6 +99,7 @@ export interface UserData {
   experience?: ExperienceEntry[];
   publications?: Publication[];
   awards?: Award[];
+  projects?: ProjectEntry[];
   navItems: NavItem[];
 }
 
@@ -145,7 +155,7 @@ export const userData: UserData = {
   // --- About ------------------------------------------------------------------
   // A short bio. Wrap words in **double asterisks** to highlight them.
   about:
-    "I am a Computer Science student and competitive programmer. I earned my bachelor's degree at Zhejiang University of Technology (Experimental Class) and am beginning my master's at Peking University.\n\n" +
+    "I am a Computer Science student and competitive programmer. I earned my bachelor's degree at Zhejiang University of Technology (Experimental Class) and am beginning my master's at **Peking University.**\n\n" +
     "I enjoy algorithms, problem solving, and building clean solutions. I am deeply interested in AGI and LLMs, and I am continuously exploring and learning about computer science and AI.",
 
   // --- Education --- (array) ---------------------------------------------------
@@ -255,6 +265,19 @@ export const userData: UserData = {
     },
   ],
 
+  // --- Projects --- (array) ----------------------------------------------------
+  // Personal / open-source projects, shown as a two-column grid (one column on
+  // narrow screens). `url` opens in a new tab; leave it "" for a non-clickable
+  // item. `tech` is an optional list of tags rendered as small pills.
+  projects: [
+    {
+      title: "leaf",
+      description: "🍃 A clean, config-driven academic homepage template.",
+      url: "https://github.com/mulberyn/leaf",
+      tech: ["TypeScript", "CSS"],
+    },
+  ],
+
   // --- Navigation --- ----------------------------------------------------------
   // Each `id` MUST match a section rendered in MainContent.
   navItems: [
@@ -263,5 +286,6 @@ export const userData: UserData = {
     { id: "experience", label: "Experience" },
     { id: "publications", label: "Publications" },
     { id: "awards", label: "Awards" },
+    { id: "projects", label: "Projects" },
   ],
 };

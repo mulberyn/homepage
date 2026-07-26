@@ -1,5 +1,5 @@
 import { Fragment } from 'react'
-import { User, GraduationCap, Briefcase, BookOpen, Award } from 'lucide-react'
+import { User, GraduationCap, Briefcase, BookOpen, Award, FolderGit } from 'lucide-react'
 import { userData } from '../config/data'
 import Section from './Section'
 import TimelineList from './TimelineList'
@@ -7,6 +7,7 @@ import TimelineItem from './TimelineItem'
 import EducationItem from './EducationItem'
 import PublicationItem from './PublicationItem'
 import AwardsList from './AwardsList'
+import ProjectItem from './ProjectItem'
 
 /**
  * Render a bio string, turning **double-asterisk** spans into highlighted text
@@ -112,6 +113,17 @@ export default function MainContent() {
         {enabled.has('awards') && userData.awards && userData.awards.length > 0 && (
           <Section id="awards" icon={Award} title="Awards">
             <AwardsList awards={userData.awards} />
+          </Section>
+        )}
+
+        {/* ---------------- Projects (two-column grid) ---------------- */}
+        {enabled.has('projects') && userData.projects && userData.projects.length > 0 && (
+          <Section id="projects" icon={FolderGit} title="Projects">
+            <ul className="grid grid-cols-1 gap-4 md:grid-cols-2">
+              {userData.projects.map((project, i) => (
+                <ProjectItem key={i} {...project} />
+              ))}
+            </ul>
           </Section>
         )}
       </div>
