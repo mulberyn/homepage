@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="./favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#FFFAF7" />
+    <meta
+      name="description"
+      content="Personal academic homepage — research, publications, and more."
+    />
+
+    <!-- Prevent a flash of the wrong theme: read the saved theme before paint.
+         This design is light-only, with an optional warmer "creamy" theme. -->
+    <script>
+      (function () {
+        try {
+          var saved = localStorage.getItem('theme')
+          var theme = saved === 'warm' ? 'warm' : 'light'
+          document.documentElement.setAttribute('data-theme', theme)
+        } catch (e) {}
+      })()
+    </script>
+
+    <!-- Fonts: Inter (sans, headings + UI) + Lora (serif, body). Light & airy. -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Lora:ital,wght@0,400;0,500;0,600;1,400&display=swap"
+      rel="stylesheet"
+    />
+
+    <title>Your Name — Academic Homepage</title>
+    <script type="module" crossorigin src="/homepage/assets/index-CsRjICq0.js"></script>
+    <link rel="stylesheet" crossorigin href="/homepage/assets/index-QLzbgkxx.css">
+  <link rel="manifest" href="/homepage/manifest.webmanifest"><script id="vite-plugin-pwa:register-sw" src="/homepage/registerSW.js"></script></head>
+  <body>
+    <div id="root"></div>
+  </body>
+</html>
