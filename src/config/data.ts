@@ -178,45 +178,37 @@ export const userData: UserData = {
   // --- Experience --- (array, newest first) ------------------------------------
   experience: [
     {
-      date: "2025 – Present",
-      title: "Algorithm / Software Intern",
-      company: "Example Tech",
+      date: "2022.09 – 2024.07",
+      title: "Team Member",
+      company: "ZJUT2 Team, Zhejiang University of Technology",
       description:
-        "Applying algorithmic problem-solving to real-world systems. Replace " +
-        "this with your own experience.",
-    },
-    {
-      date: "Summer 2024",
-      title: "Backend Engineering Intern",
-      company: "Example Startup",
-      description:
-        "Built internal tooling and services. Replace with your own experience.",
+        "Member of the university's official training team ZJUT2 (Advised by Professor Han Shanshan)",
     },
   ],
 
   // --- Publications --- (array, newest first) ----------------------------------
   // Any link left out of `links` is hidden. Common keys: pdf, code, project.
-  publications: [
-    {
-      title: "Sample Publication Title — replace or remove me",
-      authors: "Zhang Sheng, Co-author A, Co-author B",
-      venue: "Conference",
-      year: "2025",
-      links: {
-        pdf: "#",
-        code: "#",
-      },
-    },
-    {
-      title: "Another Sample Paper on Something Interesting",
-      authors: "Co-author A, Zhang Sheng",
-      venue: "Workshop",
-      year: "2024",
-      links: {
-        pdf: "#",
-      },
-    },
-  ],
+  // publications: [
+  //   {
+  //     title: "Sample Publication Title — replace or remove me",
+  //     authors: "Zhang Sheng, Co-author A, Co-author B",
+  //     venue: "Conference",
+  //     year: "2025",
+  //     links: {
+  //       pdf: "#",
+  //       code: "#",
+  //     },
+  //   },
+  //   {
+  //     title: "Another Sample Paper on Something Interesting",
+  //     authors: "Co-author A, Zhang Sheng",
+  //     venue: "Workshop",
+  //     year: "2024",
+  //     links: {
+  //       pdf: "#",
+  //     },
+  //   },
+  // ],
 
   // --- Awards --- (array) ------------------------------------------------------
   // `highlight: true` awards are shown by default; the rest collapse behind a
