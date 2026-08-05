@@ -9,4 +9,4 @@
 
 I am a Computer Science student and competitive programmer. I earned my bachelor's degree at Zhejiang University of Technology (Experimental Class) and am beginning my master's at **Peking University.**
 
-I enjoy algorithms, problem solving, and building clean solutions. I am deeply interested in AGI and LLMs, and I am continuously exploring and learning about computer science and AI.
+I enjoy algorithms, problem solving, and building clean solutions. I am deeply interested in AGI, LLMs and software engineering. I am continuously exploring and learning about computer science and AI.
